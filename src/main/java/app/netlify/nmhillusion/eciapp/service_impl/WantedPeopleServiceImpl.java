@@ -62,38 +62,62 @@ public class WantedPeopleServiceImpl implements WantedPeopleService {
 
         final int totalPages = Integer.parseInt(pageInfoOfCrawlService.getTotalPages());
         final List<WantedPeopleEntity> resultList = new LinkedList<>();
+
         if (0 < totalPages) {
             long lastActionTimeInMillis = 0;
             for (int pageNumber = 1; pageNumber <= totalPages; ++pageNumber) {
-                onUpdateProgress.throwableVoidApply(new StatusModel()
-                        .setStatusName("%s/%s".formatted(pageNumber, totalPages))
-                        .setStatusDetail("start loading page " + pageNumber)
-                );
+                /// Mark: TESTING - start
+                if (10 == pageNumber) {
+                    break;
+                }
+                /// Mark: TESTING - end
 
-                while (System.currentTimeMillis() < lastActionTimeInMillis + intervalTimeInMillis) ;
-                lastActionTimeInMillis = System.currentTimeMillis();
-
-                final List<WantedPeopleEntity> wantedPeopleEntitiesInPage = crawlWantedPeopleOfPage(pageNumber);
-                onUpdateProgress.throwableVoidApply(new StatusModel()
-                        .setStatusName("%s/%s".formatted(pageNumber, totalPages))
-                        .setStatusDetail("finished page " + pageNumber)
-                );
-
+                final List<WantedPeopleEntity> wantedPeopleEntitiesInPage = __executeCrawlDataFromPage(
+                        lastActionTimeInMillis,
+                        pageNumber,
+                        totalPages,
+                        onUpdateProgress);
                 resultList.addAll(wantedPeopleEntitiesInPage);
             }
 
-            if (!resultList.isEmpty()) {
-                exportListToExcel(resultList, outputDataPath);
-                onUpdateProgress.throwableVoidApply(new StatusModel()
-                        .setStatusName("%s/%s".formatted(totalPages, totalPages))
-                        .setStatusDetail("completed export data to " + outputDataPath)
-                );
-            } else {
-                onUpdateProgress.throwableVoidApply(new StatusModel()
-                        .setStatusName("%s/%s".formatted(totalPages, totalPages))
-                        .setStatusDetail("Error: No data to export")
-                );
-            }
+            __executeExportResultToExcel(
+                    resultList,
+                    outputDataPath,
+                    onUpdateProgress,
+                    totalPages);
+        }
+    }
+
+    private List<WantedPeopleEntity> __executeCrawlDataFromPage(long lastActionTimeInMillis, int pageNumber, int totalPages, ThrowableVoidFunction<StatusModel> onUpdateProgress) throws Throwable {
+        onUpdateProgress.throwableVoidApply(new StatusModel()
+                .setStatusName("%s/%s".formatted(pageNumber, totalPages))
+                .setStatusDetail("start loading page " + pageNumber)
+        );
+
+        while (System.currentTimeMillis() < lastActionTimeInMillis + intervalTimeInMillis) ;
+        lastActionTimeInMillis = System.currentTimeMillis();
+
+        final List<WantedPeopleEntity> wantedPeopleEntitiesInPage = crawlWantedPeopleOfPage(pageNumber);
+        onUpdateProgress.throwableVoidApply(new StatusModel()
+                .setStatusName("%s/%s".formatted(pageNumber, totalPages))
+                .setStatusDetail("finished page " + pageNumber)
+        );
+
+        return wantedPeopleEntitiesInPage;
+    }
+
+    private void __executeExportResultToExcel(List<WantedPeopleEntity> resultList, String outputDataPath, ThrowableVoidFunction<StatusModel> onUpdateProgress, int totalPages) throws Throwable {
+        if (!resultList.isEmpty()) {
+            exportListToExcel(resultList, outputDataPath);
+            onUpdateProgress.throwableVoidApply(new StatusModel()
+                    .setStatusName("%s/%s".formatted(totalPages, totalPages))
+                    .setStatusDetail("completed export data to " + outputDataPath)
+            );
+        } else {
+            onUpdateProgress.throwableVoidApply(new StatusModel()
+                    .setStatusName("%s/%s".formatted(totalPages, totalPages))
+                    .setStatusDetail("Error: No data to export")
+            );
         }
     }
 
