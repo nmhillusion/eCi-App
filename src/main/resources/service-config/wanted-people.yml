@@ -1,0 +1,5 @@
+crawl-page:
+  url: "http://vpcqcsdt.bocongan.gov.vn/Truy-n%C3%A3-TP/%C4%90%E1%BB%91i-t%C6%B0%E1%BB%A3ng-truy-n%C3%A3"
+
+crawl-service:
+  interval-time-in-millis: 10000
