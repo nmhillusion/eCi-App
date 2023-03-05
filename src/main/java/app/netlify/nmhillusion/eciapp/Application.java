@@ -1,11 +1,13 @@
 package app.netlify.nmhillusion.eciapp;
 
 import app.netlify.nmhillusion.n2mix.helper.YamlReader;
+import app.netlify.nmhillusion.n2mix.helper.log.LogHelper;
 import app.netlify.nmhillusion.n2mix.type.function.ThrowableVoidNoInputFunction;
 import app.netlify.nmhillusion.neon_di.NeonEngine;
 import app.netlify.nmhillusion.neon_di.exception.NeonException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -44,13 +46,20 @@ public class Application extends javafx.application.Application {
     }
 
     @Override
-    public void start(Stage stage) throws NeonException, IOException {
+    public void start(Stage stage) throws IOException {
         final String appTitle = getConfig("title");
+        stage.setTitle(appTitle);
+        try (final InputStream appIcon = Application.class.getResourceAsStream("icons/app-icon.png")) {
+            LogHelper.getLog(this).infoFormat("set icon for app -> %s", appIcon);
+            if (null != appIcon) {
+                stage.getIcons().add(new Image(appIcon));
+            }
+        }
 
         final FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("mainView.fxml"));
         final Scene scene = new Scene(fxmlLoader.load(), 420, 300);
-        stage.setTitle(appTitle);
         stage.setScene(scene);
+
         stage.show();
     }
 
