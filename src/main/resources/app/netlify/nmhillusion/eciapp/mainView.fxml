@@ -86,12 +86,18 @@
                 onAction="#onClickButton__ExecuteOutDataWantedPeople"
         />
     </HBox>
-    <HBox prefWidth="Infinity" alignment="CENTER" spacing="10">
+    <VBox prefWidth="Infinity" alignment="CENTER" spacing="10">
         <Label text="--/--" fx:id="lblExecuteStatus">
             <font>
                 <Font name="System Bold" size="16"/>
             </font>
         </Label>
-        <Label text="..." fx:id="lblExecuteStatusDetail"/>
-    </HBox>
+        <Label fx:id="lblExecuteStatusDetail"
+               prefWidth="Infinity" wrapText="true" lineSpacing="5"
+        >
+            <padding>
+                <Insets left="5" right="5" />
+            </padding>
+        </Label>
+    </VBox>
 </VBox>

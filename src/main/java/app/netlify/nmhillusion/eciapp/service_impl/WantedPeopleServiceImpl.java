@@ -89,7 +89,7 @@ public class WantedPeopleServiceImpl implements WantedPeopleService {
         long timeForViewResult = 2_000L;
         onUpdateProgress.throwableVoidApply(new StatusModel()
                 .setStatusName("%s/%s".formatted(pageNumber, totalPages))
-                .setStatusDetail("loading page " + pageNumber)
+                .setStatusDetail(">> loading page " + pageNumber)
         );
 
         while (System.currentTimeMillis() < lastActionTimeInMillisRef.get() + intervalTimeInMillis - timeForViewResult) ;
@@ -97,7 +97,7 @@ public class WantedPeopleServiceImpl implements WantedPeopleService {
         final List<WantedPeopleEntity> wantedPeopleEntitiesInPage = crawlWantedPeopleOfPage(pageNumber);
         onUpdateProgress.throwableVoidApply(new StatusModel()
                 .setStatusName("%s/%s".formatted(pageNumber, totalPages))
-                .setStatusDetail("finished executing page " + pageNumber)
+                .setStatusDetail("<< finished executing page " + pageNumber + "; size: " + wantedPeopleEntitiesInPage.size())
         );
 
         while (System.currentTimeMillis() < lastActionTimeInMillisRef.get() + intervalTimeInMillis) ;
