@@ -22,6 +22,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
 
 import static app.netlify.nmhillusion.n2mix.helper.log.LogHelper.getLog;
 
@@ -64,20 +65,16 @@ public class WantedPeopleServiceImpl implements WantedPeopleService {
         final List<WantedPeopleEntity> resultList = new LinkedList<>();
 
         if (0 < totalPages) {
-            long lastActionTimeInMillis = 0;
+            AtomicLong lastActionTimeInMillisRef = new AtomicLong(0L);
             for (int pageNumber = 1; pageNumber <= totalPages; ++pageNumber) {
-                /// Mark: TESTING - start
-                if (10 == pageNumber) {
-                    break;
-                }
-                /// Mark: TESTING - end
-
                 final List<WantedPeopleEntity> wantedPeopleEntitiesInPage = __executeCrawlDataFromPage(
-                        lastActionTimeInMillis,
+                        lastActionTimeInMillisRef,
                         pageNumber,
                         totalPages,
                         onUpdateProgress);
                 resultList.addAll(wantedPeopleEntitiesInPage);
+
+                lastActionTimeInMillisRef.set(System.currentTimeMillis());
             }
 
             __executeExportResultToExcel(
@@ -88,20 +85,22 @@ public class WantedPeopleServiceImpl implements WantedPeopleService {
         }
     }
 
-    private List<WantedPeopleEntity> __executeCrawlDataFromPage(long lastActionTimeInMillis, int pageNumber, int totalPages, ThrowableVoidFunction<StatusModel> onUpdateProgress) throws Throwable {
+    private List<WantedPeopleEntity> __executeCrawlDataFromPage(AtomicLong lastActionTimeInMillisRef, int pageNumber, int totalPages, ThrowableVoidFunction<StatusModel> onUpdateProgress) throws Throwable {
+        long timeForViewResult = 2_000L;
         onUpdateProgress.throwableVoidApply(new StatusModel()
                 .setStatusName("%s/%s".formatted(pageNumber, totalPages))
-                .setStatusDetail("start loading page " + pageNumber)
+                .setStatusDetail("loading page " + pageNumber)
         );
 
-        while (System.currentTimeMillis() < lastActionTimeInMillis + intervalTimeInMillis) ;
-        lastActionTimeInMillis = System.currentTimeMillis();
+        while (System.currentTimeMillis() < lastActionTimeInMillisRef.get() + intervalTimeInMillis - timeForViewResult) ;
 
         final List<WantedPeopleEntity> wantedPeopleEntitiesInPage = crawlWantedPeopleOfPage(pageNumber);
         onUpdateProgress.throwableVoidApply(new StatusModel()
                 .setStatusName("%s/%s".formatted(pageNumber, totalPages))
-                .setStatusDetail("finished page " + pageNumber)
+                .setStatusDetail("finished executing page " + pageNumber)
         );
+
+        while (System.currentTimeMillis() < lastActionTimeInMillisRef.get() + intervalTimeInMillis) ;
 
         return wantedPeopleEntitiesInPage;
     }

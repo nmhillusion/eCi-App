@@ -4,7 +4,6 @@ import app.netlify.nmhillusion.eciapp.Application;
 import app.netlify.nmhillusion.eciapp.model.StatusModel;
 import app.netlify.nmhillusion.eciapp.service.MainService;
 import app.netlify.nmhillusion.eciapp.service.WantedPeopleService;
-import app.netlify.nmhillusion.n2mix.helper.log.LogHelper;
 import app.netlify.nmhillusion.n2mix.validator.StringValidator;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -87,7 +86,7 @@ public class MainController {
                     showAlert(Alert.AlertType.INFORMATION, "Completed", ButtonType.OK);
                     updateEnableOfExecuteButton(true);
                 } catch (Throwable ex) {
-                    LogHelper.getLog(this).error(ex);
+                    getLog(this).error(ex);
                     showAlert(Alert.AlertType.ERROR, ex.getMessage(), ButtonType.OK);
                 }
             });
@@ -107,13 +106,17 @@ public class MainController {
         Platform.runLater(() -> {
             lblExecuteStatus.setText(statusModel.getStatusName());
             lblExecuteStatusDetail.setText(statusModel.getStatusDetail());
+
+            getLog(this).infoFormat("update status: ", statusModel);
         });
     }
 
     private void showAlert(Alert.AlertType alertType, String message, ButtonType buttonTypes) {
-        Alert alert = new Alert(alertType, "", buttonTypes);
-        alert.setHeaderText(message);
-        final Optional<ButtonType> result_ = alert.showAndWait();
-        getLog(this).info("result of alert: " + result_);
+        Platform.runLater(() -> {
+            Alert alert = new Alert(alertType, "", buttonTypes);
+            alert.setHeaderText(message);
+            final Optional<ButtonType> result_ = alert.showAndWait();
+            getLog(this).info("result of alert: " + result_);
+        });
     }
 }
