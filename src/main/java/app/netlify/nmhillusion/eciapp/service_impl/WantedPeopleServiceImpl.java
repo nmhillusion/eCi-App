@@ -5,12 +5,13 @@ import app.netlify.nmhillusion.eciapp.model.StatusModel;
 import app.netlify.nmhillusion.eciapp.model.WantedPeopleEntity;
 import app.netlify.nmhillusion.eciapp.service.WantedPeopleService;
 import app.netlify.nmhillusion.n2mix.constant.OkHttpContentType;
+import app.netlify.nmhillusion.n2mix.exception.InvalidArgument;
+import app.netlify.nmhillusion.n2mix.exception.MissingDataException;
 import app.netlify.nmhillusion.n2mix.helper.YamlReader;
 import app.netlify.nmhillusion.n2mix.helper.http.HttpHelper;
 import app.netlify.nmhillusion.n2mix.helper.http.RequestHttpBuilder;
-import app.netlify.nmhillusion.n2mix.helper.office.ExcelWriteHelper;
-import app.netlify.nmhillusion.n2mix.helper.office.excel.ExcelDataModel;
-import app.netlify.nmhillusion.n2mix.type.ChainList;
+import app.netlify.nmhillusion.n2mix.helper.office.excel.ExcelWriteHelper;
+import app.netlify.nmhillusion.n2mix.helper.office.excel.model.ExcelDataConverterModel;
 import app.netlify.nmhillusion.n2mix.type.ChainMap;
 import app.netlify.nmhillusion.n2mix.type.function.ThrowableVoidFunction;
 import app.netlify.nmhillusion.neon_di.annotation.Neon;
@@ -19,10 +20,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static app.netlify.nmhillusion.n2mix.helper.log.LogHelper.getLog;
 
@@ -70,7 +69,7 @@ public class WantedPeopleServiceImpl implements WantedPeopleService {
                         .setStatusName("%s/%s".formatted(pageNumber, totalPages))
                         .setStatusDetail("start loading page " + pageNumber)
                 );
-                
+
                 while (System.currentTimeMillis() < lastActionTimeInMillis + intervalTimeInMillis) ;
                 lastActionTimeInMillis = System.currentTimeMillis();
 
@@ -129,28 +128,21 @@ public class WantedPeopleServiceImpl implements WantedPeopleService {
         return wantedPeopleEntitiesInPage;
     }
 
-    private void exportListToExcel(List<WantedPeopleEntity> dataList, String outputDataPath) throws IOException {
+    private void exportListToExcel(List<WantedPeopleEntity> dataList, String outputDataPath) throws IOException, InvalidArgument, MissingDataException {
         final byte[] outputData = new ExcelWriteHelper()
-                .addSheetData(new ExcelDataModel()
+                .addSheetData(new ExcelDataConverterModel<WantedPeopleEntity>()
                         .setSheetName("wanted_people")
-                        .setHeaders(new ChainList<List<String>>()
-                                .chainAdd(
-                                        Arrays.asList(
-                                                "fullName",
-                                                "birthday",
-                                                "livePlace",
-                                                "nameOfParents",
-                                                "crimeName",
-                                                "decisionDate",
-                                                "decisionOffice"
-                                        )
 
-                                )
-                        )
-                        .setBodyData(
-                                dataList.stream()
-                                        .map(WantedPeopleEntity::dataToList)
-                                        .collect(Collectors.toList())
+                        .addColumnConverters("fullName", WantedPeopleEntity::getFullName)
+                        .addColumnConverters("birthday", WantedPeopleEntity::getBirthday)
+                        .addColumnConverters("livePlace", WantedPeopleEntity::getLivePlace)
+                        .addColumnConverters("nameOfParents", WantedPeopleEntity::getNameOfParents)
+                        .addColumnConverters("crimeName", WantedPeopleEntity::getCrimeName)
+                        .addColumnConverters("decisionDate", WantedPeopleEntity::getDecisionDate)
+                        .addColumnConverters("decisionOffice", WantedPeopleEntity::getDecisionOffice)
+
+                        .setRawData(
+                                dataList
                         )
                 )
                 .build();

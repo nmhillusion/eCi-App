@@ -82,16 +82,4 @@ public class WantedPeopleEntity extends Stringeable {
         this.decisionOffice = decisionOffice;
         return this;
     }
-
-    public List<String> dataToList() {
-        return Arrays.asList(
-                fullName,
-                birthday,
-                livePlace,
-                nameOfParents,
-                crimeName,
-                decisionDate,
-                decisionOffice
-        );
-    }
 }
