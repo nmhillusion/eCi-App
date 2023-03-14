@@ -38,7 +38,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
-<VBox xmlns:fx="http://javafx.com/fxml/1" spacing="8.0" xmlns="http://javafx.com/javafx/19" fx:controller="app.netlify.nmhillusion.eciapp.controller.main.MainController">
+<VBox xmlns:fx="http://javafx.com/fxml/1" spacing="8.0" xmlns="http://javafx.com/javafx/17" fx:controller="app.netlify.nmhillusion.eciapp.controller.main.MainController">
     <ButtonBar maxHeight="-1.0" maxWidth="-1.0" nodeOrientation="RIGHT_TO_LEFT" prefWidth="Infinity" style="-fx-padding: 10px;">
         <buttons>
             <Button id="btnWantedPeople" defaultButton="true" mnemonicParsing="false" onAction="#onClickButton__WantedPeople" prefHeight="43.0" prefWidth="204.0" text="Wanted People" textAlignment="CENTER"/>
