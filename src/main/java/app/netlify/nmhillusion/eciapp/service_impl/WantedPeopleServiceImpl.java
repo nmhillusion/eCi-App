@@ -24,7 +24,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
-import static app.netlify.nmhillusion.n2mix.helper.log.LogHelper.getLog;
+import static app.netlify.nmhillusion.n2mix.helper.log.LogHelper.getLogger;
 
 /**
  * date: 2023-03-05
@@ -49,17 +49,17 @@ public class WantedPeopleServiceImpl implements WantedPeopleService {
             BASE_URL = yamlReader.getProperty("crawl-page.url");
             intervalTimeInMillis = Long.parseLong(yamlReader.getProperty("crawl-service.interval-time-in-millis"));
 
-            getLog(this).infoFormat("BASE_URL: ", BASE_URL);
-            getLog(this).infoFormat("intervalTimeInMillis: ", intervalTimeInMillis);
+            getLogger(this).infoFormat("BASE_URL: ", BASE_URL);
+            getLogger(this).infoFormat("intervalTimeInMillis: ", intervalTimeInMillis);
         } catch (Exception ex) {
-            getLog(this).error(ex);
+            getLogger(this).error(ex);
         }
     }
 
     @Override
     public void service(String outputDataPath, ThrowableVoidFunction<StatusModel> onUpdateProgress) throws Throwable {
         final PageInfoModel pageInfoOfCrawlService = getPageInfoOfCrawlService();
-        getLog(this).infoFormat("pageInfo: %s", pageInfoOfCrawlService);
+        getLogger(this).infoFormat("pageInfo: %s", pageInfoOfCrawlService);
 
         final int totalPages = Integer.parseInt(pageInfoOfCrawlService.getTotalPages());
         final List<WantedPeopleEntity> resultList = new LinkedList<>();
@@ -141,12 +141,12 @@ public class WantedPeopleServiceImpl implements WantedPeopleService {
     }
 
     private List<WantedPeopleEntity> crawlWantedPeopleOfPage(int pageNumber) throws Exception {
-        getLog(this).infoFormat(">> crawlWantedPeopleOfPage(int pageNumber = %s)", pageNumber);
+        getLogger(this).infoFormat(">> crawlWantedPeopleOfPage(int pageNumber = %s)", pageNumber);
         final String pageContent = fetchPageContentOfPage(pageNumber);
 
         final List<WantedPeopleEntity> wantedPeopleEntitiesInPage = pageMatcher.parseListWantedPeople(pageContent);
 
-        getLog(this).infoFormat("<< crawlWantedPeopleOfPage(int pageNumber = %s): size: %s", pageNumber, wantedPeopleEntitiesInPage.size());
+        getLogger(this).infoFormat("<< crawlWantedPeopleOfPage(int pageNumber = %s): size: %s", pageNumber, wantedPeopleEntitiesInPage.size());
 
         return wantedPeopleEntitiesInPage;
     }

@@ -9,14 +9,17 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import static app.netlify.nmhillusion.n2mix.helper.log.LogHelper.getLog;
+import static app.netlify.nmhillusion.n2mix.helper.log.LogHelper.getLogger;
 
 /**
  * date: 2023-02-25
@@ -32,6 +35,7 @@ public class MainController {
     public Label lblExecuteStatus;
     public Label lblExecuteStatusDetail;
     public Button btnExecuteOutDataWantedPeople;
+    private Image alertIcon;
     @FXML
     private Label appTitle;
 
@@ -46,6 +50,12 @@ public class MainController {
             throw new Exception("Cannot find WantedPeopleService");
         }
 
+        try (final InputStream alertIconStream = Application.class.getResourceAsStream("icons/app-icon.png")) {
+            if (alertIconStream != null) {
+                alertIcon = new Image(alertIconStream);
+            }
+        }
+
         mainService = mainServiceOptional.get();
         wantedPeopleService = wantedPeopleServiceOptional.get();
 
@@ -56,7 +66,7 @@ public class MainController {
 
     @FXML
     protected void onClickButton__WantedPeople() {
-        getLog(this).info("click on button WantedPeople");
+        getLogger(this).info("click on button WantedPeople");
     }
 
     public void onClickButton__BrowserOutData(ActionEvent actionEvent) {
@@ -65,7 +75,7 @@ public class MainController {
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Excel File(*.xlsx)", "*.xlsx"));
         final File chosenFile = fileChooser.showSaveDialog(null);
 
-        getLog(this).infoFormat("chosen file: ", chosenFile);
+        getLogger(this).infoFormat("chosen file: ", chosenFile);
 
         if (null != chosenFile) {
             txtOutDataPath.setText(chosenFile.getAbsolutePath());
@@ -86,12 +96,12 @@ public class MainController {
                     showAlert(Alert.AlertType.INFORMATION, "Completed", ButtonType.OK);
                     updateEnableOfExecuteButton(true);
                 } catch (Throwable ex) {
-                    getLog(this).error(ex);
+                    getLogger(this).error(ex);
                     showAlert(Alert.AlertType.ERROR, ex.getMessage(), ButtonType.OK);
                 }
             });
         } catch (Throwable ex) {
-            getLog(this).error(ex);
+            getLogger(this).error(ex);
             showAlert(Alert.AlertType.ERROR, ex.getMessage(), ButtonType.OK);
         }
     }
@@ -107,16 +117,19 @@ public class MainController {
             lblExecuteStatus.setText(statusModel.getStatusName());
             lblExecuteStatusDetail.setText(statusModel.getStatusDetail());
 
-            getLog(this).infoFormat("update status: ", statusModel);
+            getLogger(this).infoFormat("update status: ", statusModel);
         });
     }
 
     private void showAlert(Alert.AlertType alertType, String message, ButtonType buttonTypes) {
         Platform.runLater(() -> {
             Alert alert = new Alert(alertType, "", buttonTypes);
+            Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+
+            stage.getIcons().add(this.alertIcon);
             alert.setHeaderText(message);
             final Optional<ButtonType> result_ = alert.showAndWait();
-            getLog(this).info("result of alert: " + result_);
+            getLogger(this).info("result of alert: " + result_);
         });
     }
 }

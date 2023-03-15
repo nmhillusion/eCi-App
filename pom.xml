@@ -126,20 +126,20 @@
         <dependency>
             <groupId>com.github.nmhillusion</groupId>
             <artifactId>n2mix-java</artifactId>
-            <version>2023.3.5.3</version>
+            <version>2023.3.16</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.nmhillusion</groupId>
+            <artifactId>neon-di</artifactId>
+            <version>2023.3.16</version>
         </dependency>
 
         <!--        <dependency>-->
-        <!--            <groupId>com.github.nmhillusion</groupId>-->
+        <!--            <groupId>app.netlify.nmhillusion</groupId>-->
         <!--            <artifactId>neon-di</artifactId>-->
-        <!--            <version>2023.3.14</version>-->
+        <!--            <version>1.0</version>-->
         <!--        </dependency>-->
-
-        <dependency>
-            <groupId>app.netlify.nmhillusion</groupId>
-            <artifactId>neon-di</artifactId>
-            <version>1.0</version>
-        </dependency>
 
     </dependencies>
 

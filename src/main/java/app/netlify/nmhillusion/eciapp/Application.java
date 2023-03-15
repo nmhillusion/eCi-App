@@ -50,7 +50,7 @@ public class Application extends javafx.application.Application {
         final String appTitle = getConfig("title");
         stage.setTitle(appTitle);
         try (final InputStream appIcon = Application.class.getResourceAsStream("icons/app-icon.png")) {
-            LogHelper.getLog(this).infoFormat("set icon for app -> %s", appIcon);
+            LogHelper.getLogger(this).infoFormat("set icon for app -> %s", appIcon);
             if (null != appIcon) {
                 stage.getIcons().add(new Image(appIcon));
             }

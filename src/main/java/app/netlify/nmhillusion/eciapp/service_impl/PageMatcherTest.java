@@ -11,7 +11,7 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Objects;
 
-import static app.netlify.nmhillusion.n2mix.helper.log.LogHelper.getLog;
+import static app.netlify.nmhillusion.n2mix.helper.log.LogHelper.getLogger;
 
 class PageMatcherTest {
     private static String pageContent = "";
@@ -24,7 +24,7 @@ class PageMatcherTest {
 
 //            getLog(PageMatcherTest.class).infoFormat("pageContent test: %s", pageContent);
         } catch (Exception ex) {
-            getLog(PageMatcherTest.class).error(ex);
+            getLogger(PageMatcherTest.class).error(ex);
         }
     }
 
@@ -32,7 +32,7 @@ class PageMatcherTest {
     void parseListWantedPeople() {
         Assertions.assertDoesNotThrow(() -> {
             final List<WantedPeopleEntity> wantedPeopleEntities = pageMatcher.parseListWantedPeople(pageContent);
-            getLog(this).infoFormat("parsed list of wanted people: ", wantedPeopleEntities);
+            getLogger(this).infoFormat("parsed list of wanted people: ", wantedPeopleEntities);
         });
     }
 
@@ -40,7 +40,7 @@ class PageMatcherTest {
     void parsePagerInfoCell() {
         Assertions.assertDoesNotThrow(() -> {
             final PageInfoModel pageInfoModel = pageMatcher.parsePagerInfoCell(pageContent);
-            getLog(this).infoFormat("parsed page info model: ", pageInfoModel);
+            getLogger(this).infoFormat("parsed page info model: ", pageInfoModel);
         });
     }
 }
