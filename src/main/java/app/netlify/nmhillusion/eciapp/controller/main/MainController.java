@@ -121,7 +121,7 @@ public class MainController {
         });
     }
 
-    private void showAlert(Alert.AlertType alertType, String message, ButtonType buttonTypes) {
+    private void showAlert(Alert.AlertType alertType, String message, ButtonType... buttonTypes) {
         Platform.runLater(() -> {
             Alert alert = new Alert(alertType, "", buttonTypes);
             Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
@@ -131,5 +131,9 @@ public class MainController {
             final Optional<ButtonType> result_ = alert.showAndWait();
             getLogger(this).info("result of alert: " + result_);
         });
+    }
+
+    public void onClickButton__PEP(ActionEvent actionEvent) {
+        getLogger(this).info("click on button PEP");
     }
 }

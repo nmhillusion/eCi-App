@@ -12,7 +12,6 @@ module app.netlify.nmhillusion.eciapp {
     requires com.almasb.fxgl.all;
     requires n2mix.java;
     requires neon.di;
-    requires org.junit.jupiter.api;
 
     opens app.netlify.nmhillusion.eciapp to javafx.fxml, neon.di;
     exports app.netlify.nmhillusion.eciapp;
@@ -20,5 +19,6 @@ module app.netlify.nmhillusion.eciapp {
     exports app.netlify.nmhillusion.eciapp.controller.main;
 
     opens app.netlify.nmhillusion.eciapp.service_impl to neon.di;
+    opens app.netlify.nmhillusion.eciapp.service_impl.politics_ruler to neon.di;
     opens app.netlify.nmhillusion.eciapp.model to n2mix.java;
 }
