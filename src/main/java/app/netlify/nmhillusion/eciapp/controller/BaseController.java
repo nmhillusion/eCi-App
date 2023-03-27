@@ -5,6 +5,7 @@ import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -43,4 +44,6 @@ public abstract class BaseController {
             getLogger(this).info("result of alert: " + result_);
         });
     }
+
+    protected abstract Pane getMainPane() throws Exception;
 }
