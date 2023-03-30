@@ -5,21 +5,29 @@
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <VBox xmlns:fx="http://javafx.com/fxml/1" spacing="3.0" xmlns="http://javafx.com/javafx/19" fx:controller="app.netlify.nmhillusion.eciapp.controller.main.MainController">
 
-    <MenuButton text="MainMenu">
-        <items>
-            <MenuItem text="Wanted People"
-                      onAction="#onClickButton__WantedPeople"
-            />
-            <MenuItem text="PEP" onAction="#onClickButton__PEP"/>
-        </items>
-    </MenuButton>
+    <HBox>
+        <padding>
+            <Insets left="6.0" right="6.0"/>
+        </padding>
+        <MenuButton text="MainMenu">
+            <items>
+                <MenuItem text="Wanted People"
+                          onAction="#onClickButton__WantedPeople"
+                />
+                <MenuItem text="PEP" onAction="#onClickButton__PEP"/>
+            </items>
+        </MenuButton>
+    </HBox>
 
-    <HBox id="title" alignment="CENTER_LEFT" prefHeight="39.0" prefWidth="Infinity">
+    <HBox id="title" alignment="CENTER_LEFT" prefHeight="39.0" prefWidth="Infinity"
+          style="-fx-background-color: #dddddd;"
+    >
         <padding>
             <Insets left="10.0" right="10.0"/>
         </padding>
