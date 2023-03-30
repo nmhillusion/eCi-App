@@ -1,42 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.Glow?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <VBox xmlns:fx="http://javafx.com/fxml/1" spacing="3.0" xmlns="http://javafx.com/javafx/19" fx:controller="app.netlify.nmhillusion.eciapp.controller.main.MainController">
-    <ButtonBar prefHeight="10" nodeOrientation="LEFT_TO_RIGHT" prefWidth="Infinity" style="-fx-padding: 10px; -fx-background-color: #dddddd;"
-    >
-        <buttons>
-            <Button id="btnWantedPeople" defaultButton="true" mnemonicParsing="false" onAction="#onClickButton__WantedPeople"
-                    prefHeight="3.0"
-                    text="Wanted People" textAlignment="CENTER"
-            >
-                <font>
-                    <Font size="10" />
-                </font>
-            </Button>
 
-            <Button id="btnPEP" defaultButton="true" mnemonicParsing="false" onAction="#onClickButton__PEP"
-                    prefHeight="3.0"
-                    text="PEP" textAlignment="CENTER"
-            >
-                <font>
-                    <Font size="10" />
-                </font>
-            </Button>
-        </buttons>
-        <effect>
-            <Glow/>
-        </effect>
-    </ButtonBar>
+    <MenuButton text="MainMenu">
+        <items>
+            <MenuItem text="Wanted People"
+                      onAction="#onClickButton__WantedPeople"
+            />
+            <MenuItem text="PEP" onAction="#onClickButton__PEP"/>
+        </items>
+    </MenuButton>
 
     <HBox id="title" alignment="CENTER_LEFT" prefHeight="39.0" prefWidth="Infinity">
         <padding>
             <Insets left="10.0" right="10.0"/>
         </padding>
-        <Label fx:id="appTitle" text="Crawl Wanted People">
+        <Label fx:id="appTitle" text="Compliance Inspection">
             <font>
                 <Font name="System Bold" size="18.0"/>
             </font>

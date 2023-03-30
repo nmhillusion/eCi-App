@@ -22,6 +22,7 @@ module app.netlify.nmhillusion.eciapp {
     opens app.netlify.nmhillusion.eciapp.service_impl.politics_ruler to neon.di;
     opens app.netlify.nmhillusion.eciapp.model to n2mix.java;
     opens app.netlify.nmhillusion.eciapp.controller.wanted_people to javafx.fxml, neon.di;
-    exports app.netlify.nmhillusion.eciapp.controller.main;
+    opens app.netlify.nmhillusion.eciapp.controller.pep to javafx.fxml, neon.di;
+//    exports app.netlify.nmhillusion.eciapp.controller.main;
     opens app.netlify.nmhillusion.eciapp.controller.main to javafx.fxml, neon.di;
 }

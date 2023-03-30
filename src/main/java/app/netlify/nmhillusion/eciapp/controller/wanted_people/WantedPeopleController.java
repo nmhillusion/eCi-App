@@ -52,12 +52,6 @@ public class WantedPeopleController extends BaseController {
         return fxmlLoader.load();
     }
 
-    @FXML
-    protected void onClickButton__WantedPeople() {
-        updateEnableOfExecuteButton(true);
-        getLogger(this).info("click on button WantedPeople");
-    }
-
     public void onClickButton__BrowserOutData(ActionEvent actionEvent) {
         final FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Set place to put excel file");

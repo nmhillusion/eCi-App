@@ -5,6 +5,6 @@ package app.netlify.nmhillusion.eciapp.service;
  * <p>
  * created-by: nmhillusion
  */
-public interface CrawlPoliticsRulersService {
+public interface PoliticsRulersService {
     void doExecute() throws Exception;
 }

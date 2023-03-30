@@ -34,7 +34,7 @@
     </GridPane>
     <Line/>
     <HBox prefWidth="Infinity" alignment="CENTER">
-        <Button prefHeight="30.0" prefWidth="140.0" text="Execute"
+        <Button prefHeight="30.0" text="Execute Crawl Wanted People"
                 fx:id="btnExecuteOutDataWantedPeople"
                 onAction="#onClickButton__ExecuteOutDataWantedPeople"
         />

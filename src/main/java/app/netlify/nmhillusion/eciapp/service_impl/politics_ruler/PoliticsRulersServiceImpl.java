@@ -2,7 +2,7 @@ package app.netlify.nmhillusion.eciapp.service_impl.politics_ruler;
 
 import app.netlify.nmhillusion.eciapp.model.politics_ruler.IndexEntity;
 import app.netlify.nmhillusion.eciapp.model.politics_ruler.PoliticianEntity;
-import app.netlify.nmhillusion.eciapp.service.CrawlPoliticsRulersService;
+import app.netlify.nmhillusion.eciapp.service.PoliticsRulersService;
 import app.netlify.nmhillusion.n2mix.exception.MissingDataException;
 import app.netlify.nmhillusion.n2mix.helper.YamlReader;
 import app.netlify.nmhillusion.n2mix.helper.firebase.FirebaseWrapper;
@@ -37,7 +37,7 @@ import static app.netlify.nmhillusion.n2mix.helper.log.LogHelper.getLogger;
  */
 
 @Neon
-public class CrawlPoliticsRulersServiceImpl implements CrawlPoliticsRulersService {
+public class PoliticsRulersServiceImpl implements PoliticsRulersService {
 
     private static final String MAIN_RULERS_PAGE_URL = "https://rulers.org/";
     private static final int MIN_INTERVAL__TICK__TIME_IN_MILLIS = 10_000;
@@ -51,7 +51,7 @@ public class CrawlPoliticsRulersServiceImpl implements CrawlPoliticsRulersServic
     private final DateTimeFormatter exportDataDateTimeFormatter;
     private YamlReader yamlReader;
 
-    public CrawlPoliticsRulersServiceImpl() {
+    public PoliticsRulersServiceImpl() {
         this.exportDataDateTimeFormatter = new DateTimeFormatterBuilder()
                 .appendPattern(getConfig("export.excel.date-format"))
                 .toFormatter();
