@@ -50,7 +50,8 @@ public class PoliticsRulersServiceImpl implements PoliticsRulersService {
     private final MatchParser matchParser = new MatchParser();
 
     private final FirebaseWrapper firebaseWrapper = FirebaseWrapper.getInstance();
-    private final boolean isTesting = true;
+    private final boolean isTesting = false;
+    private final boolean isTestingOnePage = true;
     private final DateTimeFormatter exportDataDateTimeFormatter;
     private YamlReader yamlReader;
 
@@ -86,16 +87,29 @@ public class PoliticsRulersServiceImpl implements PoliticsRulersService {
         final Map<String, List<PoliticianEntity>> politicianData = new HashMap<>();
         final List<IndexEntity> indexLinks = parseHomePage();
         getLogger(this).info("parser index links: " + indexLinks);
+        onUpdateProgress.throwableVoidApply(new StatusModel()
+                .setStatusName("loaded homepage")
+                .setStatusDetail("obtains homepage with total indexes: " + indexLinks.size())
+        );
 
         if (!indexLinks.isEmpty()) {
             for (IndexEntity indexLinkItem : indexLinks) {
                 final long startTime = System.currentTimeMillis();
+                onUpdateProgress.throwableVoidApply(new StatusModel()
+                        .setStatusName("loading - " + indexLinkItem.getTitle())
+                        .setStatusDetail(indexLinkItem.getTitle() + " : " + indexLinkItem.getHref())
+                );
 
                 final List<PoliticianEntity> politicianEntities = fetchCharacterPage(indexLinkItem);
-                getLogger(this).info("politician list -> " + politicianEntities.size());
+                final int politicianListSize = politicianEntities.size();
+                getLogger(this).info("politician list -> " + politicianListSize);
+                onUpdateProgress.throwableVoidApply(new StatusModel()
+                        .setStatusName("finished - " + indexLinkItem.getTitle())
+                        .setStatusDetail(indexLinkItem.getTitle() + " : " + indexLinkItem.getHref() + " -> size: " + politicianListSize + "; waiting for next step...")
+                );
 
                 politicianData.put(indexLinkItem.getTitle(), politicianEntities);
-                if (isTesting) {
+                if (isTesting || isTestingOnePage) {
                     break; /// Mark: TESTING
                 }
 

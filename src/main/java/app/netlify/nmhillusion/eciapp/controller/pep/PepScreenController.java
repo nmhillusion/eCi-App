@@ -75,7 +75,6 @@ public class PepScreenController extends BaseScreenController {
     }
 
     public void onClickButton__ExecuteOutDataPEP(ActionEvent actionEvent) {
-        /// TODO: 2023-03-30 impl
         getLogger(this).info("on click on PEP execute");
 
         try {
@@ -84,10 +83,8 @@ public class PepScreenController extends BaseScreenController {
                 throw new Exception("Must setup output data path");
             }
 
-            getLogger(this).info("prepare go into thread, service: " + politicsRulersService);
             executorService.submit(() -> {
                 try {
-                    getLogger(this).info("inside thread, service: " + politicsRulersService);
                     updateEnableOfExecuteButton(false);
                     politicsRulersService.service(outputDataPath, this::updateStatusModel);
                     showAlert(Alert.AlertType.INFORMATION, "Completed", ButtonType.OK);

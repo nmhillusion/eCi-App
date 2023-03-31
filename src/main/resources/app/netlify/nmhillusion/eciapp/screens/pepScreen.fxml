@@ -45,11 +45,15 @@
                 <Font name="System Bold" size="16"/>
             </font>
         </Label>
+        <Line strokeWidth="1.2" strokeType="INSIDE" stroke="darkgray" />
         <Label fx:id="lblExecuteStatusDetail"
-               prefWidth="Infinity" wrapText="true" lineSpacing="5"
+               prefWidth="Infinity" wrapText="true"
         >
+            <font>
+                <Font name="Monospace" size="11"/>
+            </font>
             <padding>
-                <Insets left="5" right="5"/>
+                <Insets left="10" right="10"/>
             </padding>
         </Label>
     </VBox>
