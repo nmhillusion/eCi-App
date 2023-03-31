@@ -51,7 +51,7 @@ public class PoliticsRulersServiceImpl implements PoliticsRulersService {
 
     private final FirebaseWrapper firebaseWrapper = FirebaseWrapper.getInstance();
     private final boolean isTesting = false;
-    private final boolean isTestingOnePage = true;
+    private final boolean isTestingOnePage = false;
     private final DateTimeFormatter exportDataDateTimeFormatter;
     private YamlReader yamlReader;
 
