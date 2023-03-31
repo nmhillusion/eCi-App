@@ -1,5 +1,6 @@
 package app.netlify.nmhillusion.eciapp.service_impl.politics_ruler;
 
+import app.netlify.nmhillusion.eciapp.model.StatusModel;
 import app.netlify.nmhillusion.eciapp.model.politics_ruler.IndexEntity;
 import app.netlify.nmhillusion.eciapp.model.politics_ruler.PoliticianEntity;
 import app.netlify.nmhillusion.eciapp.service.PoliticsRulersService;
@@ -10,6 +11,7 @@ import app.netlify.nmhillusion.n2mix.helper.http.HttpHelper;
 import app.netlify.nmhillusion.n2mix.helper.http.RequestHttpBuilder;
 import app.netlify.nmhillusion.n2mix.helper.office.excel.ExcelWriteHelper;
 import app.netlify.nmhillusion.n2mix.helper.office.excel.model.BasicExcelDataModel;
+import app.netlify.nmhillusion.n2mix.type.function.ThrowableVoidFunction;
 import app.netlify.nmhillusion.n2mix.util.IOStreamUtil;
 import app.netlify.nmhillusion.n2mix.util.RegexUtil;
 import app.netlify.nmhillusion.n2mix.util.StringUtil;
@@ -21,6 +23,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
@@ -47,7 +50,7 @@ public class PoliticsRulersServiceImpl implements PoliticsRulersService {
     private final MatchParser matchParser = new MatchParser();
 
     private final FirebaseWrapper firebaseWrapper = FirebaseWrapper.getInstance();
-    private final boolean isTesting = false;
+    private final boolean isTesting = true;
     private final DateTimeFormatter exportDataDateTimeFormatter;
     private YamlReader yamlReader;
 
@@ -73,8 +76,12 @@ public class PoliticsRulersServiceImpl implements PoliticsRulersService {
     }
 
     @Override
-    public void doExecute() throws Exception {
+    public void service(String outputDataPath, ThrowableVoidFunction<StatusModel> onUpdateProgress) throws Throwable {
         getLogger(this).info("Running for fetching politicians from Rulers");
+        onUpdateProgress.throwableVoidApply(new StatusModel()
+                .setStatusName("starting")
+                .setStatusDetail("start crawling...")
+        );
 
         final Map<String, List<PoliticianEntity>> politicianData = new HashMap<>();
         final List<IndexEntity> indexLinks = parseHomePage();
@@ -101,11 +108,16 @@ public class PoliticsRulersServiceImpl implements PoliticsRulersService {
 
 
         for (String chainName : excelData.keySet()) {
-            try (OutputStream os = new FileOutputStream(chainName + ".test.xlsx")) {
+            try (OutputStream os = new FileOutputStream(Paths.get(outputDataPath, chainName + ".pep.xlsx").toFile())) {
                 os.write(excelData.get(chainName));
                 os.flush();
             }
         }
+
+        onUpdateProgress.throwableVoidApply(new StatusModel()
+                .setStatusName("finished")
+                .setStatusDetail("finished crawling...")
+        );
     }
 
 

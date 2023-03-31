@@ -20,10 +20,10 @@ import static app.netlify.nmhillusion.n2mix.helper.log.LogHelper.getLogger;
  * created-by: nmhillusion
  */
 
-public abstract class BaseController {
+public abstract class BaseScreenController {
     private final Image alertIcon;
 
-    public BaseController() throws IOException {
+    public BaseScreenController() throws IOException {
         try (final InputStream alertIconStream = Application.class.getResourceAsStream("icons/app-icon.png")) {
             if (null != alertIconStream) {
                 alertIcon = new Image(alertIconStream);
@@ -45,5 +45,9 @@ public abstract class BaseController {
         });
     }
 
-    protected abstract Pane getMainPane() throws Exception;
+    public abstract Pane getMainPane() throws Exception;
+
+    public void onApplyPane(Pane appliedPane) throws Exception {
+    }
+
 }

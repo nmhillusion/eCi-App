@@ -1,8 +1,9 @@
 package app.netlify.nmhillusion.eciapp.controller.main;
 
 import app.netlify.nmhillusion.eciapp.Application;
-import app.netlify.nmhillusion.eciapp.controller.pep.PepController;
-import app.netlify.nmhillusion.eciapp.controller.wanted_people.WantedPeopleController;
+import app.netlify.nmhillusion.eciapp.controller.BaseScreenController;
+import app.netlify.nmhillusion.eciapp.controller.pep.PepScreenController;
+import app.netlify.nmhillusion.eciapp.controller.wanted_people.WantedPeopleScreenController;
 import app.netlify.nmhillusion.neon_di.NeonEngine;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -29,22 +30,25 @@ public class MainController {
     @FXML
     private Label appTitle;
 
-    private WantedPeopleController wantedPeopleController;
-    private PepController pepController;
+    private WantedPeopleScreenController wantedPeopleController;
+    private PepScreenController pepController;
 
     public MainController() throws Exception {
         final NeonEngine beanFactoryInstance = Application.getBeanFactoryInstance();
-        final Optional<WantedPeopleController> wantedPeopleControllerOpt = beanFactoryInstance.findFirstNeonByClass(WantedPeopleController.class);
-        final Optional<PepController> pepControllerOpt = beanFactoryInstance.findFirstNeonByClass(PepController.class);
+        final Optional<WantedPeopleScreenController> wantedPeopleControllerOpt = beanFactoryInstance.findFirstNeonByClass(WantedPeopleScreenController.class);
+        final Optional<PepScreenController> pepControllerOpt = beanFactoryInstance.findFirstNeonByClass(PepScreenController.class);
 
         wantedPeopleControllerOpt.ifPresent(peopleController -> wantedPeopleController = peopleController);
         pepControllerOpt.ifPresent(pepController_ -> pepController = pepController_);
     }
 
-    private void applyForScreen(Pane screen_) {
+    private void applyForScreen(BaseScreenController screenController_) throws Exception {
         final ObservableList<Node> paneChildren = bodyPane.getChildren();
         paneChildren.clear();
-        paneChildren.add(screen_);
+        final Pane appliedPane = screenController_.getMainPane();
+        paneChildren.add(appliedPane);
+
+        screenController_.onApplyPane(appliedPane);
     }
 
     @FXML
@@ -52,7 +56,7 @@ public class MainController {
         getLogger(this).info("click on button WantedPeople");
 
         appTitle.setText("Crawl Wanted People");
-        applyForScreen(wantedPeopleController.getMainPane());
+        applyForScreen(wantedPeopleController);
     }
 
 
@@ -61,6 +65,6 @@ public class MainController {
         getLogger(this).info("click on button PEP");
 
         appTitle.setText("Crawl Politics Rulers");
-        applyForScreen(pepController.getMainPane());
+        applyForScreen(pepController);
     }
 }

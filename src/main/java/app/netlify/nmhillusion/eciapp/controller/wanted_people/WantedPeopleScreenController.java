@@ -1,14 +1,13 @@
 package app.netlify.nmhillusion.eciapp.controller.wanted_people;
 
 import app.netlify.nmhillusion.eciapp.Application;
-import app.netlify.nmhillusion.eciapp.controller.BaseController;
+import app.netlify.nmhillusion.eciapp.controller.BaseScreenController;
 import app.netlify.nmhillusion.eciapp.model.StatusModel;
 import app.netlify.nmhillusion.eciapp.service.WantedPeopleService;
 import app.netlify.nmhillusion.n2mix.validator.StringValidator;
 import app.netlify.nmhillusion.neon_di.annotation.Neon;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
@@ -28,7 +27,7 @@ import static app.netlify.nmhillusion.n2mix.helper.log.LogHelper.getLogger;
  */
 
 @Neon
-public class WantedPeopleController extends BaseController {
+public class WantedPeopleScreenController extends BaseScreenController {
     private final ExecutorService executorService = Executors.newCachedThreadPool();
     public TextField txtOutDataPath;
     public Label lblExecuteStatus;
@@ -36,7 +35,7 @@ public class WantedPeopleController extends BaseController {
     public Button btnExecuteOutDataWantedPeople;
     private WantedPeopleService wantedPeopleService;
 
-    public WantedPeopleController() throws Exception {
+    public WantedPeopleScreenController() throws Exception {
         Application.addListenerOnStop(executorService::shutdownNow);
     }
 

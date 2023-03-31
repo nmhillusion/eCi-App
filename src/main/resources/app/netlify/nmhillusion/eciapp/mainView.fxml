@@ -15,7 +15,7 @@
         <padding>
             <Insets left="6.0" right="6.0"/>
         </padding>
-        <MenuButton text="MainMenu">
+        <MenuButton text="Main Menu">
             <items>
                 <MenuItem text="Wanted People"
                           onAction="#onClickButton__WantedPeople"

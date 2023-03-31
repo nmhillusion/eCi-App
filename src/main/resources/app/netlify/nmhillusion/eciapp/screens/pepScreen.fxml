@@ -5,7 +5,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
-<VBox xmlns:fx="http://javafx.com/fxml/1" spacing="3.0" xmlns="http://javafx.com/javafx/19" fx:controller="app.netlify.nmhillusion.eciapp.controller.pep.PepController">
+<VBox xmlns:fx="http://javafx.com/fxml/1" spacing="3.0" xmlns="http://javafx.com/javafx/19"
+>
 
     <GridPane prefWidth="Infinity">
         <padding>
@@ -19,7 +20,7 @@
                        GridPane.columnIndex="0" GridPane.rowIndex="1"
             />
             <Button id="btnBrowser" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Browser"
-                    GridPane.columnIndex="1" GridPane.rowIndex="1" onAction="#onClickButton__BrowserOutData"
+                    GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="btnBrowserOutputFolder"
             />
         </children>
 
@@ -36,11 +37,10 @@
     <HBox prefWidth="Infinity" alignment="CENTER">
         <Button prefHeight="30.0" text="Execute Crawl PEP"
                 fx:id="btnExecuteOutDataPEP"
-                onAction="#onClickButton__ExecuteOutDataPEP"
         />
     </HBox>
     <VBox prefWidth="Infinity" alignment="CENTER" spacing="10">
-        <Label text="--/--" fx:id="lblExecuteStatus">
+        <Label text="---" fx:id="lblExecuteStatus">
             <font>
                 <Font name="System Bold" size="16"/>
             </font>
