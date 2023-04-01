@@ -1,3 +1,7 @@
+testing:
+  data: false
+  onlyFetchOnePage: true
+
 export:
   excel:
     date-format: dd/MM/yyyy

@@ -50,15 +50,18 @@ public class PoliticsRulersServiceImpl implements PoliticsRulersService {
     private final MatchParser matchParser = new MatchParser();
 
     private final FirebaseWrapper firebaseWrapper = FirebaseWrapper.getInstance();
-    private final boolean isTesting = false;
-    private final boolean isTestingOnePage = false;
     private final DateTimeFormatter exportDataDateTimeFormatter;
+    private boolean isTestingData = false;
+    private boolean isTestingOnePage = false;
     private YamlReader yamlReader;
 
     public PoliticsRulersServiceImpl() {
         this.exportDataDateTimeFormatter = new DateTimeFormatterBuilder()
                 .appendPattern(getConfig("export.excel.date-format"))
                 .toFormatter();
+
+        this.isTestingData = Boolean.parseBoolean(getConfig("testing.data"));
+        this.isTestingOnePage = Boolean.parseBoolean(getConfig("testing.onlyFetchOnePage"));
     }
 
     private synchronized String getConfig(String key) {
@@ -109,7 +112,8 @@ public class PoliticsRulersServiceImpl implements PoliticsRulersService {
                 );
 
                 politicianData.put(indexLinkItem.getTitle(), politicianEntities);
-                if (isTesting || isTestingOnePage) {
+
+                if (isTestingOnePage) {
                     break; /// Mark: TESTING
                 }
 
@@ -199,7 +203,7 @@ public class PoliticsRulersServiceImpl implements PoliticsRulersService {
 
         /// Mark: TESTING (start)
         String pageContent = "";
-        if (!isTesting) {
+        if (!isTestingData) {
             pageContent = new String(httpHelper.get(
                     new RequestHttpBuilder()
                             .setUrl(MAIN_RULERS_PAGE_URL)
@@ -246,7 +250,7 @@ public class PoliticsRulersServiceImpl implements PoliticsRulersService {
 
         /// Mark: TESTING (start)
         String pageContent = "";
-        if (!isTesting) {
+        if (!isTestingData) {
             pageContent = new String(httpHelper.get(
                     new RequestHttpBuilder()
                             .setUrl(getCharacterPageUrl(indexEntity.getHref()))
