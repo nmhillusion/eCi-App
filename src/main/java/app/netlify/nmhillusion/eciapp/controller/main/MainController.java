@@ -1,6 +1,7 @@
 package app.netlify.nmhillusion.eciapp.controller.main;
 
 import app.netlify.nmhillusion.eciapp.Application;
+import app.netlify.nmhillusion.eciapp.StartApp;
 import app.netlify.nmhillusion.eciapp.controller.BaseScreenController;
 import app.netlify.nmhillusion.eciapp.controller.pep.PepScreenController;
 import app.netlify.nmhillusion.eciapp.controller.wanted_people.WantedPeopleScreenController;
@@ -34,7 +35,7 @@ public class MainController {
     private PepScreenController pepController;
 
     public MainController() throws Exception {
-        final NeonEngine beanFactoryInstance = Application.getBeanFactoryInstance();
+        final NeonEngine beanFactoryInstance = StartApp.getBeanFactoryInstance();
         final Optional<WantedPeopleScreenController> wantedPeopleControllerOpt = beanFactoryInstance.findFirstNeonByClass(WantedPeopleScreenController.class);
         final Optional<PepScreenController> pepControllerOpt = beanFactoryInstance.findFirstNeonByClass(PepScreenController.class);
 

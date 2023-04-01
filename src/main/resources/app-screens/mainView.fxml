@@ -5,11 +5,11 @@
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<VBox xmlns:fx="http://javafx.com/fxml/1" spacing="3.0" xmlns="http://javafx.com/javafx/19" fx:controller="app.netlify.nmhillusion.eciapp.controller.main.MainController">
+<VBox xmlns:fx="http://javafx.com/fxml/1" spacing="3.0" xmlns="http://javafx.com/javafx/19"
+      fx:controller="app.netlify.nmhillusion.eciapp.controller.main.MainController">
 
     <HBox>
         <padding>

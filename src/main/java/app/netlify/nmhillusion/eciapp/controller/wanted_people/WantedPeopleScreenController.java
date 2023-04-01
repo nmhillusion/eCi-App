@@ -1,6 +1,7 @@
 package app.netlify.nmhillusion.eciapp.controller.wanted_people;
 
 import app.netlify.nmhillusion.eciapp.Application;
+import app.netlify.nmhillusion.eciapp.StartApp;
 import app.netlify.nmhillusion.eciapp.controller.BaseScreenController;
 import app.netlify.nmhillusion.eciapp.model.StatusModel;
 import app.netlify.nmhillusion.eciapp.service.WantedPeopleService;
@@ -41,13 +42,13 @@ public class WantedPeopleScreenController extends BaseScreenController {
 
     @Override
     public Pane getMainPane() throws Exception {
-        final Optional<WantedPeopleService> wantedPeopleServiceOptional = Application.getBeanFactoryInstance().findFirstNeonByClass(WantedPeopleService.class);
+        final Optional<WantedPeopleService> wantedPeopleServiceOptional = StartApp.getBeanFactoryInstance().findFirstNeonByClass(WantedPeopleService.class);
         if (wantedPeopleServiceOptional.isEmpty()) {
             throw new Exception("Cannot find WantedPeopleService");
         }
         wantedPeopleService = wantedPeopleServiceOptional.get();
 
-        final FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("screens/wantedPeopleScreen.fxml"));
+        final FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("app-screens/wantedPeopleScreen.fxml"));
         return fxmlLoader.load();
     }
 

@@ -1,6 +1,5 @@
 package app.netlify.nmhillusion.eciapp.controller;
 
-import app.netlify.nmhillusion.eciapp.Application;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -10,6 +9,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.Optional;
 
 import static app.netlify.nmhillusion.n2mix.helper.log.LogHelper.getLogger;
@@ -21,19 +21,26 @@ import static app.netlify.nmhillusion.n2mix.helper.log.LogHelper.getLogger;
  */
 
 public abstract class BaseScreenController {
-    private final Image alertIcon;
+    private Image alertIcon;
 
     public BaseScreenController() throws IOException {
-        try (final InputStream alertIconStream = Application.class.getResourceAsStream("icons/app-icon.png")) {
-            if (null != alertIconStream) {
-                alertIcon = new Image(alertIconStream);
-            } else {
-                throw new IOException("alert icon stream is null");
-            }
-        }
     }
 
-    protected void showAlert(Alert.AlertType alertType, String message, ButtonType... buttonTypes) {
+    protected synchronized void showAlert(Alert.AlertType alertType, String message, ButtonType... buttonTypes) {
+        if (null == alertIcon) {
+            try (final InputStream alertIconStream = getClass().getClassLoader().getResourceAsStream("app-icons/app-icon.png")) {
+                if (null != alertIconStream) {
+                    alertIcon = new Image(alertIconStream);
+                } else {
+                    final URL alertIconResource = getClass().getClassLoader().getResource(".");
+                    getLogger(this).error("from path: " + alertIconResource);
+                    throw new IOException("alert icon stream is null");
+                }
+            } catch (IOException e) {
+                getLogger(this).error("cannot load alert icon");
+            }
+        }
+
         Platform.runLater(() -> {
             Alert alert = new Alert(alertType, "", buttonTypes);
             Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();

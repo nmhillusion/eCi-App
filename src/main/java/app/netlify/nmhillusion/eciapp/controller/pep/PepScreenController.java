@@ -48,7 +48,7 @@ public class PepScreenController extends BaseScreenController {
     public Pane getMainPane() throws Exception {
         getLogger(this).info("service: " + politicsRulersService);
 
-        final FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("screens/pepScreen.fxml"));
+        final FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("app-screens/pepScreen.fxml"));
         fxmlLoader.setController(this);
         return fxmlLoader.load();
     }
