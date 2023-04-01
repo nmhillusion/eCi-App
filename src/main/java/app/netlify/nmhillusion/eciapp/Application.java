@@ -2,6 +2,7 @@ package app.netlify.nmhillusion.eciapp;
 
 import app.netlify.nmhillusion.eciapp.helper.FxmlLoadBuilder;
 import app.netlify.nmhillusion.eciapp.helper.ResourceHelper;
+import app.netlify.nmhillusion.n2mix.exception.InvalidArgument;
 import app.netlify.nmhillusion.n2mix.helper.YamlReader;
 import app.netlify.nmhillusion.n2mix.type.function.ThrowableVoidNoInputFunction;
 import app.netlify.nmhillusion.neon_di.annotation.Neon;
@@ -27,6 +28,10 @@ public class Application extends javafx.application.Application {
         }
     }
 
+    public static void main(String[] args) {
+        launch(args);
+    }
+
     private String getConfig(String configKey) {
         try (final InputStream configStream = ResourceHelper.loadResourceStream("app-config/main.yml")) {
             final YamlReader yamlReader = new YamlReader(configStream);
@@ -36,13 +41,12 @@ public class Application extends javafx.application.Application {
         }
     }
 
-    public static void main(String[] args) {
-        launch(args);
-    }
-
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) throws IOException, InvalidArgument {
         final String appTitle = getConfig("title");
+        final int appWidth = Integer.parseInt(getConfig("size.width"));
+        final int appHeight = Integer.parseInt(getConfig("size.height"));
+
         stage.setTitle(appTitle);
         try (final InputStream appIcon = ResourceHelper.loadResourceStream("app-icons/app-icon.png")) {
             getLogger(this).infoFormat("set icon for app -> %s", appIcon);
@@ -55,7 +59,7 @@ public class Application extends javafx.application.Application {
         final Scene scene = new Scene(new FxmlLoadBuilder()
                 .setFxmlFileURL(mainViewUrl)
                 .build()
-                , 420, 300);
+                , appWidth, appHeight);
         stage.setScene(scene);
 
         stage.show();

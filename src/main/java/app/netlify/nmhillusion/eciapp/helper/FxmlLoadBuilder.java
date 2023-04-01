@@ -1,6 +1,7 @@
 package app.netlify.nmhillusion.eciapp.helper;
 
 import app.netlify.nmhillusion.eciapp.StartApp;
+import app.netlify.nmhillusion.n2mix.exception.InvalidArgument;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
 
@@ -49,7 +50,11 @@ public class FxmlLoadBuilder {
         return this;
     }
 
-    public <T> T build() throws IOException {
+    public <T> T build() throws IOException, InvalidArgument {
+        if (null == fxmlFileURL) {
+            throw new InvalidArgument("Missing setup fxml file url");
+        }
+
         if (null == controller) {
             return FXMLLoader.load(
                     getFxmlFileURL(),
