@@ -6,6 +6,7 @@ import app.netlify.nmhillusion.eciapp.controller.BaseScreenController;
 import app.netlify.nmhillusion.eciapp.controller.pep.PepScreenController;
 import app.netlify.nmhillusion.eciapp.controller.wanted_people.WantedPeopleScreenController;
 import app.netlify.nmhillusion.neon_di.NeonEngine;
+import app.netlify.nmhillusion.neon_di.annotation.Neon;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -25,6 +26,7 @@ import static app.netlify.nmhillusion.n2mix.helper.log.LogHelper.getLogger;
  * created-by: nmhillusion
  */
 
+@Neon
 public class MainController {
     public StackPane bodyPane;
     private Image alertIcon;

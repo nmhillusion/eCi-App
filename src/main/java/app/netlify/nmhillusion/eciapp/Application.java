@@ -1,16 +1,17 @@
 package app.netlify.nmhillusion.eciapp;
 
+import app.netlify.nmhillusion.eciapp.helper.FxmlLoadBuilder;
 import app.netlify.nmhillusion.eciapp.helper.ResourceHelper;
 import app.netlify.nmhillusion.n2mix.helper.YamlReader;
 import app.netlify.nmhillusion.n2mix.type.function.ThrowableVoidNoInputFunction;
 import app.netlify.nmhillusion.neon_di.annotation.Neon;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class Application extends javafx.application.Application {
     }
 
     private String getConfig(String configKey) {
-        try (final InputStream configStream = ResourceHelper.loadResource("app-config/main.yml")) {
+        try (final InputStream configStream = ResourceHelper.loadResourceStream("app-config/main.yml")) {
             final YamlReader yamlReader = new YamlReader(configStream);
             return yamlReader.getProperty(configKey);
         } catch (IOException e) {
@@ -39,20 +40,21 @@ public class Application extends javafx.application.Application {
     public void start(Stage stage) throws IOException {
         final String appTitle = getConfig("title");
         stage.setTitle(appTitle);
-        try (final InputStream appIcon = ResourceHelper.loadResource("app-icons/app-icon.png")) {
+        try (final InputStream appIcon = ResourceHelper.loadResourceStream("app-icons/app-icon.png")) {
             getLogger(this).infoFormat("set icon for app -> %s", appIcon);
             if (null != appIcon) {
                 stage.getIcons().add(new Image(appIcon));
             }
         }
 
-        final FXMLLoader fxmlLoader = new FXMLLoader();
-        try (final InputStream mainScreenStream = ResourceHelper.loadResource("app-screens/mainView.fxml")) {
-            final Scene scene = new Scene(fxmlLoader.load(mainScreenStream), 420, 300);
-            stage.setScene(scene);
+        final URL mainViewUrl = ResourceHelper.loadResourceUrl("app-screens/mainView.fxml");
+        final Scene scene = new Scene(new FxmlLoadBuilder()
+                .setFxmlFileURL(mainViewUrl)
+                .build()
+                , 420, 300);
+        stage.setScene(scene);
 
-            stage.show();
-        }
+        stage.show();
     }
 
     @Override
