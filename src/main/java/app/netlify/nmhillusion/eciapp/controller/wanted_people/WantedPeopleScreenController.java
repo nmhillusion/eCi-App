@@ -1,21 +1,21 @@
 package app.netlify.nmhillusion.eciapp.controller.wanted_people;
 
 import app.netlify.nmhillusion.eciapp.Application;
-import app.netlify.nmhillusion.eciapp.StartApp;
 import app.netlify.nmhillusion.eciapp.controller.BaseScreenController;
+import app.netlify.nmhillusion.eciapp.helper.FxmlLoadBuilder;
+import app.netlify.nmhillusion.eciapp.helper.ResourceHelper;
 import app.netlify.nmhillusion.eciapp.model.StatusModel;
 import app.netlify.nmhillusion.eciapp.service.WantedPeopleService;
 import app.netlify.nmhillusion.n2mix.validator.StringValidator;
+import app.netlify.nmhillusion.neon_di.annotation.Inject;
 import app.netlify.nmhillusion.neon_di.annotation.Neon;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 
 import java.io.File;
-import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -34,6 +34,7 @@ public class WantedPeopleScreenController extends BaseScreenController {
     public Label lblExecuteStatus;
     public Label lblExecuteStatusDetail;
     public Button btnExecuteOutDataWantedPeople;
+    @Inject
     private WantedPeopleService wantedPeopleService;
 
     public WantedPeopleScreenController() throws Exception {
@@ -42,14 +43,9 @@ public class WantedPeopleScreenController extends BaseScreenController {
 
     @Override
     public Pane getMainPane() throws Exception {
-        final Optional<WantedPeopleService> wantedPeopleServiceOptional = StartApp.getBeanFactoryInstance().findFirstNeonByClass(WantedPeopleService.class);
-        if (wantedPeopleServiceOptional.isEmpty()) {
-            throw new Exception("Cannot find WantedPeopleService");
-        }
-        wantedPeopleService = wantedPeopleServiceOptional.get();
-
-        final FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("app-screens/wantedPeopleScreen.fxml"));
-        return fxmlLoader.load();
+        return new FxmlLoadBuilder()
+                .setFxmlFileURL(ResourceHelper.loadResourceUrl("app-screens/wantedPeopleScreen.fxml"))
+                .build();
     }
 
     public void onClickButton__BrowserOutData(ActionEvent actionEvent) {
