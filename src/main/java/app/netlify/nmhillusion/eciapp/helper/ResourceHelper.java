@@ -9,7 +9,7 @@ import java.net.URL;
  * created-by: nmhillusion
  */
 
-public class ResourceHelper {
+public abstract class ResourceHelper {
     public static InputStream loadResourceStream(String resourcePath) {
         return ResourceHelper.class.getClassLoader().getResourceAsStream(resourcePath);
     }
