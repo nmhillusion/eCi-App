@@ -1,11 +1,9 @@
 package app.netlify.nmhillusion.eciapp.controller.main;
 
-import app.netlify.nmhillusion.eciapp.Application;
-import app.netlify.nmhillusion.eciapp.StartApp;
 import app.netlify.nmhillusion.eciapp.controller.BaseScreenController;
 import app.netlify.nmhillusion.eciapp.controller.pep.PepScreenController;
 import app.netlify.nmhillusion.eciapp.controller.wanted_people.WantedPeopleScreenController;
-import app.netlify.nmhillusion.neon_di.NeonEngine;
+import app.netlify.nmhillusion.neon_di.annotation.Inject;
 import app.netlify.nmhillusion.neon_di.annotation.Neon;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,8 +13,6 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-
-import java.util.Optional;
 
 import static app.netlify.nmhillusion.n2mix.helper.log.LogHelper.getLogger;
 
@@ -33,17 +29,10 @@ public class MainController {
     @FXML
     private Label appTitle;
 
+    @Inject
     private WantedPeopleScreenController wantedPeopleController;
+    @Inject
     private PepScreenController pepController;
-
-    public MainController() throws Exception {
-        final NeonEngine beanFactoryInstance = StartApp.getBeanFactoryInstance();
-        final Optional<WantedPeopleScreenController> wantedPeopleControllerOpt = beanFactoryInstance.findFirstNeonByClass(WantedPeopleScreenController.class);
-        final Optional<PepScreenController> pepControllerOpt = beanFactoryInstance.findFirstNeonByClass(PepScreenController.class);
-
-        wantedPeopleControllerOpt.ifPresent(peopleController -> wantedPeopleController = peopleController);
-        pepControllerOpt.ifPresent(pepController_ -> pepController = pepController_);
-    }
 
     private void applyForScreen(BaseScreenController screenController_) throws Exception {
         final ObservableList<Node> paneChildren = bodyPane.getChildren();

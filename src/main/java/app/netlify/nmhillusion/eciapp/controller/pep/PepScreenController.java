@@ -1,7 +1,8 @@
 package app.netlify.nmhillusion.eciapp.controller.pep;
 
-import app.netlify.nmhillusion.eciapp.Application;
 import app.netlify.nmhillusion.eciapp.controller.BaseScreenController;
+import app.netlify.nmhillusion.eciapp.helper.FxmlLoadBuilder;
+import app.netlify.nmhillusion.eciapp.helper.ResourceHelper;
 import app.netlify.nmhillusion.eciapp.model.StatusModel;
 import app.netlify.nmhillusion.eciapp.service.PoliticsRulersService;
 import app.netlify.nmhillusion.n2mix.helper.log.LogHelper;
@@ -10,7 +11,6 @@ import app.netlify.nmhillusion.neon_di.annotation.Inject;
 import app.netlify.nmhillusion.neon_di.annotation.Neon;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.stage.DirectoryChooser;
@@ -48,16 +48,9 @@ public class PepScreenController extends BaseScreenController {
     public Pane getMainPane() throws Exception {
         getLogger(this).info("service: " + politicsRulersService);
 
-        final FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("app-screens/pepScreen.fxml"));
-        fxmlLoader.setController(this);
-        return fxmlLoader.load();
-    }
-
-    @Override
-    public void onApplyPane(Pane appliedPane) throws Exception {
-        super.onApplyPane(appliedPane);
-        btnBrowserOutputFolder.setOnAction(this::onClickButton__BrowserOutData);
-        btnExecuteOutDataPEP.setOnAction(this::onClickButton__ExecuteOutDataPEP);
+        return new FxmlLoadBuilder()
+                .setFxmlFileURL(ResourceHelper.loadResourceUrl("app-screens/pepScreen.fxml"))
+                .build();
     }
 
     public void onClickButton__BrowserOutData(ActionEvent actionEvent) {
