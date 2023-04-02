@@ -127,6 +127,7 @@ public class PoliticsRulersServiceImpl implements PoliticsRulersService {
                     break; /// Mark: TESTING
                 }
 
+                System.gc();
                 while (MIN_INTERVAL__TICK__TIME_IN_MILLIS > System.currentTimeMillis() - startTime) ;
             }
         }

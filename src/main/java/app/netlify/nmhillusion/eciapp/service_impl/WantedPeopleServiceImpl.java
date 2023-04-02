@@ -92,7 +92,8 @@ public class WantedPeopleServiceImpl implements WantedPeopleService {
                 .setStatusDetail(">> loading page " + pageNumber)
         );
 
-        while (System.currentTimeMillis() < lastActionTimeInMillisRef.get() + intervalTimeInMillis - timeForViewResult) ;
+        while (System.currentTimeMillis() < lastActionTimeInMillisRef.get() + intervalTimeInMillis - timeForViewResult)
+            ;
 
         final List<WantedPeopleEntity> wantedPeopleEntitiesInPage = crawlWantedPeopleOfPage(pageNumber);
         onUpdateProgress.throwableVoidApply(new StatusModel()
@@ -100,6 +101,7 @@ public class WantedPeopleServiceImpl implements WantedPeopleService {
                 .setStatusDetail("<< finished executing page " + pageNumber + "; size: " + wantedPeopleEntitiesInPage.size())
         );
 
+        System.gc();
         while (System.currentTimeMillis() < lastActionTimeInMillisRef.get() + intervalTimeInMillis) ;
 
         return wantedPeopleEntitiesInPage;
