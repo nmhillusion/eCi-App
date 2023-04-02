@@ -3,16 +3,23 @@ package app.netlify.nmhillusion.eciapp.controller.main;
 import app.netlify.nmhillusion.eciapp.controller.BaseScreenController;
 import app.netlify.nmhillusion.eciapp.controller.pep.PepScreenController;
 import app.netlify.nmhillusion.eciapp.controller.wanted_people.WantedPeopleScreenController;
+import app.netlify.nmhillusion.eciapp.helper.ResourceHelper;
 import app.netlify.nmhillusion.neon_di.annotation.Inject;
 import app.netlify.nmhillusion.neon_di.annotation.Neon;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import static app.netlify.nmhillusion.n2mix.helper.log.LogHelper.getLogger;
 
@@ -23,9 +30,9 @@ import static app.netlify.nmhillusion.n2mix.helper.log.LogHelper.getLogger;
  */
 
 @Neon
-public class MainController {
+public class MainController implements Initializable {
+    @FXML
     public StackPane bodyPane;
-    private Image alertIcon;
     @FXML
     private Label appTitle;
 
@@ -33,6 +40,27 @@ public class MainController {
     private WantedPeopleScreenController wantedPeopleController;
     @Inject
     private PepScreenController pepController;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        if (null != bodyPane) {
+            final ImageView backgroundImage = new ImageView(
+                    new Image(ResourceHelper.loadResourceStream("app-icons/app-background.png"),
+                            0,
+                            0,
+                            true,
+                            true
+                    )
+            );
+            backgroundImage.setPreserveRatio(true);
+            backgroundImage.setFitWidth(400);
+            backgroundImage.fitWidthProperty().bind(((VBox) bodyPane.getParent()).widthProperty());
+            bodyPane.getChildren()
+                    .add(
+                            backgroundImage
+                    );
+        }
+    }
 
     private void applyForScreen(BaseScreenController screenController_) throws Exception {
         final ObservableList<Node> paneChildren = bodyPane.getChildren();
