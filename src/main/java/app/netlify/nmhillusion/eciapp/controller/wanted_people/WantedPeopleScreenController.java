@@ -4,7 +4,7 @@ import app.netlify.nmhillusion.eciapp.Application;
 import app.netlify.nmhillusion.eciapp.builder.LogMessageBuilder;
 import app.netlify.nmhillusion.eciapp.controller.BaseScreenController;
 import app.netlify.nmhillusion.eciapp.controller.main.MainController;
-import app.netlify.nmhillusion.eciapp.helper.FxmlLoadBuilder;
+import app.netlify.nmhillusion.eciapp.builder.FxmlLoadBuilder;
 import app.netlify.nmhillusion.eciapp.helper.ResourceHelper;
 import app.netlify.nmhillusion.eciapp.model.StatusModel;
 import app.netlify.nmhillusion.eciapp.service.WantedPeopleService;

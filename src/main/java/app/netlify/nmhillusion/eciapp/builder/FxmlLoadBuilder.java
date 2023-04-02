@@ -1,4 +1,4 @@
-package app.netlify.nmhillusion.eciapp.helper;
+package app.netlify.nmhillusion.eciapp.builder;
 
 import app.netlify.nmhillusion.eciapp.StartApp;
 import app.netlify.nmhillusion.n2mix.exception.InvalidArgument;

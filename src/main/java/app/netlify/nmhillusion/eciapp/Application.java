@@ -1,6 +1,6 @@
 package app.netlify.nmhillusion.eciapp;
 
-import app.netlify.nmhillusion.eciapp.helper.FxmlLoadBuilder;
+import app.netlify.nmhillusion.eciapp.builder.FxmlLoadBuilder;
 import app.netlify.nmhillusion.eciapp.helper.ResourceHelper;
 import app.netlify.nmhillusion.n2mix.exception.InvalidArgument;
 import app.netlify.nmhillusion.n2mix.helper.YamlReader;
