@@ -52,12 +52,10 @@
         <Label fx:id="lblExecuteStatusDetail"
                prefWidth="Infinity" wrapText="true"
         >
-            <font>
-                <Font name="Monospace" size="11"/>
-            </font>
-            <padding>
-                <Insets left="10" right="10"/>
-            </padding>
+            <style>
+                -fx-padding: 10px;
+                -fx-background-color: #dddddd;
+            </style>
         </Label>
     </VBox>
 </VBox>

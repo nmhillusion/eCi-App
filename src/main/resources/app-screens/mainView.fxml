@@ -10,7 +10,7 @@
         <padding>
             <Insets left="6.0" right="6.0"/>
         </padding>
-        <MenuButton text="Main Menu">
+        <MenuButton text="Main Menu" fx:id="mainMenuButtons">
             <items>
                 <MenuItem text="Wanted People"
                           onAction="#onClickButton__WantedPeople"

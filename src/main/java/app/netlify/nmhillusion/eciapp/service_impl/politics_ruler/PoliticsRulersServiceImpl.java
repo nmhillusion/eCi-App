@@ -134,7 +134,7 @@ public class PoliticsRulersServiceImpl implements PoliticsRulersService {
 
         onUpdateProgress.throwableVoidApply(new StatusModel()
                 .setStatusName("finished")
-                .setStatusDetail("finished crawling...")
+                .setStatusDetail("finished crawling.")
         );
     }
 

@@ -2,6 +2,7 @@ package app.netlify.nmhillusion.eciapp.controller.wanted_people;
 
 import app.netlify.nmhillusion.eciapp.Application;
 import app.netlify.nmhillusion.eciapp.controller.BaseScreenController;
+import app.netlify.nmhillusion.eciapp.controller.main.MainController;
 import app.netlify.nmhillusion.eciapp.helper.FxmlLoadBuilder;
 import app.netlify.nmhillusion.eciapp.helper.ResourceHelper;
 import app.netlify.nmhillusion.eciapp.model.StatusModel;
@@ -41,6 +42,7 @@ public class WantedPeopleScreenController extends BaseScreenController {
     public Button btnExecuteOutDataWantedPeople;
     @Inject
     private WantedPeopleService wantedPeopleService;
+    private MainController mainController;
 
     public WantedPeopleScreenController() throws Exception {
         Application.addListenerOnStop(executorService::shutdownNow);
@@ -51,6 +53,13 @@ public class WantedPeopleScreenController extends BaseScreenController {
         return new FxmlLoadBuilder()
                 .setFxmlFileURL(ResourceHelper.loadResourceUrl("app-screens/wantedPeopleScreen.fxml"))
                 .build();
+    }
+
+    @Override
+    public void onApplyPane(Pane appliedPane, MainController mainController) throws Exception {
+        super.onApplyPane(appliedPane, mainController);
+
+        this.mainController = mainController;
     }
 
     @FXML
@@ -92,9 +101,13 @@ public class WantedPeopleScreenController extends BaseScreenController {
         }
     }
 
-    private void updateEnableOfExecuteButton(boolean enable) {
+    private void updateEnableOfExecuteButton(boolean enable_) {
         Platform.runLater(() -> {
-            btnExecuteOutDataWantedPeople.setDisable(!enable);
+            btnExecuteOutDataWantedPeople.setDisable(!enable_);
+
+            if (null != mainController) {
+                mainController.setEnableMainMenuButtons(enable_);
+            }
         });
     }
 

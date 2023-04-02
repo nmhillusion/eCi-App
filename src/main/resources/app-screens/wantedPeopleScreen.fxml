@@ -48,9 +48,10 @@
         <Label fx:id="lblExecuteStatusDetail"
                prefWidth="Infinity" wrapText="true" lineSpacing="5"
         >
-            <padding>
-                <Insets left="5" right="5"/>
-            </padding>
+            <style>
+                -fx-padding: 10px;
+                -fx-background-color: #dddddd;
+            </style>
         </Label>
     </VBox>
 </VBox>

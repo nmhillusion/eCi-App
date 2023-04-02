@@ -1,5 +1,6 @@
 package app.netlify.nmhillusion.eciapp.controller;
 
+import app.netlify.nmhillusion.eciapp.controller.main.MainController;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -54,7 +55,7 @@ public abstract class BaseScreenController {
 
     public abstract Pane getMainPane() throws Exception;
 
-    public void onApplyPane(Pane appliedPane) throws Exception {
+    public void onApplyPane(Pane appliedPane, MainController mainController) throws Exception {
     }
 
 }

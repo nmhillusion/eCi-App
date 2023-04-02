@@ -1,6 +1,8 @@
 package app.netlify.nmhillusion.eciapp.controller.pep;
 
+import app.netlify.nmhillusion.eciapp.Application;
 import app.netlify.nmhillusion.eciapp.controller.BaseScreenController;
+import app.netlify.nmhillusion.eciapp.controller.main.MainController;
 import app.netlify.nmhillusion.eciapp.helper.FxmlLoadBuilder;
 import app.netlify.nmhillusion.eciapp.helper.ResourceHelper;
 import app.netlify.nmhillusion.eciapp.model.StatusModel;
@@ -45,9 +47,10 @@ public class PepScreenController extends BaseScreenController {
 
     @Inject
     private PoliticsRulersService politicsRulersService;
+    private MainController mainController;
 
     public PepScreenController() throws IOException {
-        LogHelper.getLogger(this).info("create " + getClass());
+        Application.addListenerOnStop(executorService::shutdownNow);
     }
 
     @Override
@@ -57,6 +60,13 @@ public class PepScreenController extends BaseScreenController {
         return new FxmlLoadBuilder()
                 .setFxmlFileURL(ResourceHelper.loadResourceUrl("app-screens/pepScreen.fxml"))
                 .build();
+    }
+
+    @Override
+    public void onApplyPane(Pane appliedPane, MainController mainController) throws Exception {
+        super.onApplyPane(appliedPane, mainController);
+
+        this.mainController = mainController;
     }
 
     @FXML
@@ -110,9 +120,13 @@ public class PepScreenController extends BaseScreenController {
         });
     }
 
-    private void updateEnableOfExecuteButton(boolean enable) {
+    private void updateEnableOfExecuteButton(boolean enable_) {
         Platform.runLater(() -> {
-            btnExecuteOutDataPEP.setDisable(!enable);
+            btnExecuteOutDataPEP.setDisable(!enable_);
+
+            if (null != mainController) {
+                mainController.setEnableMainMenuButtons(enable_);
+            }
         });
     }
 }

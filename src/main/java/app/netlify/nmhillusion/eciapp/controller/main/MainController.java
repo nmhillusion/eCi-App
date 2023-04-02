@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
@@ -24,7 +25,9 @@ import static app.netlify.nmhillusion.n2mix.helper.log.LogHelper.getLogger;
 @Neon
 public class MainController {
     @FXML
-    public StackPane bodyPane;
+    private StackPane bodyPane;
+    @FXML
+    private MenuButton mainMenuButtons;
     @FXML
     private Label appTitle;
 
@@ -39,7 +42,7 @@ public class MainController {
         final Pane appliedPane = screenController_.getMainPane();
         paneChildren.add(appliedPane);
 
-        screenController_.onApplyPane(appliedPane);
+        screenController_.onApplyPane(appliedPane, this);
     }
 
     @FXML
@@ -57,5 +60,9 @@ public class MainController {
 
         appTitle.setText("Crawl Politics Rulers");
         applyForScreen(pepController);
+    }
+
+    public void setEnableMainMenuButtons(boolean enable_) {
+        mainMenuButtons.setDisable(!enable_);
     }
 }
