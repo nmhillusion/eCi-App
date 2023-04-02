@@ -10,7 +10,7 @@ import app.netlify.nmhillusion.neon_di.exception.NeonException;
  */
 
 public class StartApp {
-    private static NeonEngine neonEngine;
+    private final static NeonEngine neonEngine = new NeonEngine();
 
     public static NeonEngine getBeanFactoryInstance() {
         return neonEngine;
@@ -18,7 +18,6 @@ public class StartApp {
 
     public static void main(String[] args) {
         try {
-            neonEngine = new NeonEngine();
             neonEngine
                     .run(Application.class);
             Application.main(args);

@@ -8,7 +8,6 @@ import javafx.fxml.JavaFXBuilderFactory;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import java.util.Optional;
 import java.util.PropertyResourceBundle;
 
 /**
@@ -60,11 +59,8 @@ public class FxmlLoadBuilder {
                     getFxmlFileURL(),
                     defaultResourceBundle,
                     defaultBuilderFactory,
-                    classControllerToInstance -> {
-                        final Optional<?> instanceOptional = StartApp.getBeanFactoryInstance()
-                                .findFirstNeonByClass(classControllerToInstance);
-                        return instanceOptional.orElse(null);
-                    }
+                    classControllerToInstance -> StartApp.getBeanFactoryInstance()
+                            .makeSureObtainNeon(classControllerToInstance)
             );
         } else {
             final FXMLLoader fxmlLoader = new FXMLLoader(getFxmlFileURL());
