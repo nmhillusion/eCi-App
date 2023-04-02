@@ -100,7 +100,7 @@ public class PoliticsRulersServiceImpl implements PoliticsRulersService {
                 final long startTime = System.currentTimeMillis();
                 onUpdateProgress.throwableVoidApply(new StatusModel()
                         .setStatusName("loading - " + indexLinkItem.getTitle())
-                        .setStatusDetail(indexLinkItem.getTitle() + " : " + indexLinkItem.getHref())
+                        .setStatusDetail(">> start loading: " + indexLinkItem.getTitle() + " : " + indexLinkItem.getHref())
                 );
 
                 final List<PoliticianEntity> politicianEntities = fetchCharacterPage(indexLinkItem);
@@ -108,7 +108,7 @@ public class PoliticsRulersServiceImpl implements PoliticsRulersService {
                 getLogger(this).info("politician list -> " + politicianListSize);
                 onUpdateProgress.throwableVoidApply(new StatusModel()
                         .setStatusName("finished - " + indexLinkItem.getTitle())
-                        .setStatusDetail(indexLinkItem.getTitle() + " : " + indexLinkItem.getHref() + " -> size: " + politicianListSize + "; waiting for next step...")
+                        .setStatusDetail("<< end loading: " + indexLinkItem.getTitle() + " : " + indexLinkItem.getHref() + " -> size: " + politicianListSize + "; waiting for next step...")
                 );
 
                 politicianData.put(indexLinkItem.getTitle(), politicianEntities);

@@ -1,6 +1,6 @@
 testing:
   data: false
-  onlyFetchOnePage: true
+  onlyFetchOnePage: false
 
 export:
   excel:
