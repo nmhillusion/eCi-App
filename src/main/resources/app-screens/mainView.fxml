@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 <VBox xmlns:fx="http://javafx.com/fxml/1" spacing="3.0" xmlns="http://javafx.com/javafx/19"
       fx:controller="app.netlify.nmhillusion.eciapp.controller.main.MainController">
@@ -38,7 +32,22 @@
             </font>
         </Label>
     </HBox>
-    <StackPane fx:id="bodyPane"
-    >
+    <StackPane fx:id="bodyPane">
+        <VBox>
+            <padding>
+                <Insets top="10" left="3"/>
+            </padding>
+            <Label text="\@nmhillusion" style="-fx-text-fill: #aaa;" />
+            <Label text="version: 2023-04-02"/>
+            <Label text="App for common tasks of CI Department" />
+            <VBox>
+                <style>
+                    -fx-padding: 0 8px;
+                    -fx-font-style: italic;
+                </style>
+                <Label text="Crawling Wanted People" />
+                <Label text="Crawling PEP" />
+            </VBox>
+        </VBox>
     </StackPane>
 </VBox>

@@ -44,21 +44,23 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         if (null != bodyPane) {
-            final ImageView backgroundImage = new ImageView(
-                    new Image(ResourceHelper.loadResourceStream("app-icons/app-background.png"),
-                            0,
-                            0,
-                            true,
-                            true
-                    )
-            );
-            backgroundImage.setPreserveRatio(true);
-            backgroundImage.setFitWidth(400);
-            backgroundImage.fitWidthProperty().bind(((VBox) bodyPane.getParent()).widthProperty());
-            bodyPane.getChildren()
-                    .add(
-                            backgroundImage
-                    );
+//            final ImageView backgroundImageView = new ImageView(
+//                    new Image(ResourceHelper.loadResourceStream("app-icons/app-background.png"),
+//                            0,
+//                            0,
+//                            true,
+//                            true
+//                    )
+//            );
+////            backgroundImage.setPreserveRatio(true);
+//            backgroundImageView.setFitWidth(100);
+//            backgroundImageView.setFitHeight(100);
+//            backgroundImageView.setStyle("-fx-border: solid 3px #333;");
+////            backgroundImage.fitWidthProperty().bind(((VBox) bodyPane.getParent()).widthProperty());
+//            bodyPane.getChildren()
+//                    .add(
+//                            backgroundImageView
+//                    );
         }
     }
 
