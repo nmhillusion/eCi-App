@@ -1,13 +1,13 @@
 package app.netlify.nmhillusion.eciapp.controller.pep;
 
 import app.netlify.nmhillusion.eciapp.Application;
+import app.netlify.nmhillusion.eciapp.builder.LogMessageBuilder;
 import app.netlify.nmhillusion.eciapp.controller.BaseScreenController;
 import app.netlify.nmhillusion.eciapp.controller.main.MainController;
 import app.netlify.nmhillusion.eciapp.helper.FxmlLoadBuilder;
 import app.netlify.nmhillusion.eciapp.helper.ResourceHelper;
 import app.netlify.nmhillusion.eciapp.model.StatusModel;
 import app.netlify.nmhillusion.eciapp.service.PoliticsRulersService;
-import app.netlify.nmhillusion.n2mix.helper.log.LogHelper;
 import app.netlify.nmhillusion.n2mix.validator.StringValidator;
 import app.netlify.nmhillusion.neon_di.annotation.Inject;
 import app.netlify.nmhillusion.neon_di.annotation.Neon;
@@ -17,6 +17,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.stage.DirectoryChooser;
+import org.slf4j.event.Level;
 
 import java.io.File;
 import java.io.IOException;
@@ -102,11 +103,23 @@ public class PepScreenController extends BaseScreenController {
                     updateEnableOfExecuteButton(true);
                 } catch (Throwable ex) {
                     getLogger(this).error(ex);
+                    mainController.addLogToUI(
+                            new LogMessageBuilder()
+                                    .setLogLevel(Level.ERROR)
+                                    .setMessage(ex.getMessage())
+                                    .setContextClazz(getClass())
+                    );
                     showAlert(Alert.AlertType.ERROR, ex.getMessage(), ButtonType.OK);
                 }
             });
         } catch (Throwable ex) {
             getLogger(this).error(ex);
+            mainController.addLogToUI(
+                    new LogMessageBuilder()
+                            .setLogLevel(Level.ERROR)
+                            .setMessage(ex.getMessage())
+                            .setContextClazz(getClass())
+            );
             showAlert(Alert.AlertType.ERROR, ex.getMessage(), ButtonType.OK);
         }
     }
@@ -115,6 +128,12 @@ public class PepScreenController extends BaseScreenController {
         Platform.runLater(() -> {
             lblExecuteStatus.setText(statusModel.getStatusName());
             lblExecuteStatusDetail.setText(statusModel.getStatusDetail());
+            mainController.addLogToUI(
+                    new LogMessageBuilder()
+                            .setLogLevel(Level.INFO)
+                            .setMessage(statusModel.getStatusDetail())
+                            .setContextClazz(getClass())
+            );
 
             getLogger(this).infoFormat("update status: ", statusModel);
         });

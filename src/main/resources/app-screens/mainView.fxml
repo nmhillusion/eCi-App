@@ -37,17 +37,19 @@
             <padding>
                 <Insets top="10" left="3"/>
             </padding>
-            <Label text="\@nmhillusion" style="-fx-text-fill: #aaa;" />
+            <Label text="\@nmhillusion" style="-fx-text-fill: #aaa;"/>
             <Label text="version: 2023-04-02"/>
-            <Label text="App for common tasks of CI Department" />
+            <Label text="App for common tasks of CI Department"/>
             <VBox>
                 <style>
                     -fx-padding: 0 8px;
                     -fx-font-style: italic;
                 </style>
-                <Label text="Crawling Wanted People" />
-                <Label text="Crawling PEP" />
+                <Label text="Crawling Wanted People"/>
+                <Label text="Crawling PEP"/>
             </VBox>
         </VBox>
     </StackPane>
+    <ListView prefHeight="320" fx:id="logView" visible="false">
+    </ListView>
 </VBox>

@@ -1,6 +1,7 @@
 package app.netlify.nmhillusion.eciapp.controller.wanted_people;
 
 import app.netlify.nmhillusion.eciapp.Application;
+import app.netlify.nmhillusion.eciapp.builder.LogMessageBuilder;
 import app.netlify.nmhillusion.eciapp.controller.BaseScreenController;
 import app.netlify.nmhillusion.eciapp.controller.main.MainController;
 import app.netlify.nmhillusion.eciapp.helper.FxmlLoadBuilder;
@@ -16,6 +17,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
+import org.slf4j.event.Level;
 
 import java.io.File;
 import java.util.concurrent.ExecutorService;
@@ -92,11 +94,23 @@ public class WantedPeopleScreenController extends BaseScreenController {
                     updateEnableOfExecuteButton(true);
                 } catch (Throwable ex) {
                     getLogger(this).error(ex);
+                    mainController.addLogToUI(
+                            new LogMessageBuilder()
+                                    .setLogLevel(Level.ERROR)
+                                    .setMessage(ex.getMessage())
+                                    .setContextClazz(getClass())
+                    );
                     showAlert(Alert.AlertType.ERROR, ex.getMessage(), ButtonType.OK);
                 }
             });
         } catch (Throwable ex) {
             getLogger(this).error(ex);
+            mainController.addLogToUI(
+                    new LogMessageBuilder()
+                            .setLogLevel(Level.ERROR)
+                            .setMessage(ex.getMessage())
+                            .setContextClazz(getClass())
+            );
             showAlert(Alert.AlertType.ERROR, ex.getMessage(), ButtonType.OK);
         }
     }
@@ -115,6 +129,12 @@ public class WantedPeopleScreenController extends BaseScreenController {
         Platform.runLater(() -> {
             lblExecuteStatus.setText(statusModel.getStatusName());
             lblExecuteStatusDetail.setText(statusModel.getStatusDetail());
+            mainController.addLogToUI(
+                    new LogMessageBuilder()
+                            .setLogLevel(Level.INFO)
+                            .setMessage(statusModel.getStatusDetail())
+                            .setContextClazz(getClass())
+            );
 
             getLogger(this).infoFormat("update status: ", statusModel);
         });

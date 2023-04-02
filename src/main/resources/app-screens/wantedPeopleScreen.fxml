@@ -2,11 +2,11 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
-<VBox xmlns:fx="http://javafx.com/fxml/1" spacing="3.0" xmlns="http://javafx.com/javafx/19" fx:controller="app.netlify.nmhillusion.eciapp.controller.wanted_people.WantedPeopleScreenController">
+<VBox xmlns:fx="http://javafx.com/fxml/1" spacing="3.0" xmlns="http://javafx.com/javafx/19"
+      fx:controller="app.netlify.nmhillusion.eciapp.controller.wanted_people.WantedPeopleScreenController">
     <GridPane prefWidth="Infinity">
         <padding>
             <Insets left="8.0" right="8.0"/>

@@ -12,6 +12,7 @@ module app.netlify.nmhillusion.eciapp {
     requires com.almasb.fxgl.all;
     requires n2mix.java;
     requires neon.di;
+    requires org.slf4j;
 
     opens app.netlify.nmhillusion.eciapp to javafx.fxml, neon.di;
     exports app.netlify.nmhillusion.eciapp;
