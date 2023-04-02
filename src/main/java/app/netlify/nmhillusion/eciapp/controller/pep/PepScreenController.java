@@ -11,6 +11,7 @@ import app.netlify.nmhillusion.neon_di.annotation.Inject;
 import app.netlify.nmhillusion.neon_di.annotation.Neon;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.stage.DirectoryChooser;
@@ -31,10 +32,15 @@ import static app.netlify.nmhillusion.n2mix.helper.log.LogHelper.getLogger;
 @Neon
 public class PepScreenController extends BaseScreenController {
     private final ExecutorService executorService = Executors.newFixedThreadPool(10);
+    @FXML
     public Button btnExecuteOutDataPEP;
+    @FXML
     public Button btnBrowserOutputFolder;
+    @FXML
     public Label lblExecuteStatus;
+    @FXML
     public Label lblExecuteStatusDetail;
+    @FXML
     public TextField txtOutDataPath;
 
     @Inject
@@ -53,7 +59,8 @@ public class PepScreenController extends BaseScreenController {
                 .build();
     }
 
-    public void onClickButton__BrowserOutData(ActionEvent actionEvent) {
+    @FXML
+    protected void onClickButton__BrowserOutData(ActionEvent actionEvent) {
         getLogger(this).info("choose output folder");
 
         final DirectoryChooser fileChooser = new DirectoryChooser();
@@ -67,7 +74,8 @@ public class PepScreenController extends BaseScreenController {
         }
     }
 
-    public void onClickButton__ExecuteOutDataPEP(ActionEvent actionEvent) {
+    @FXML
+    protected void onClickButton__ExecuteOutDataPEP(ActionEvent actionEvent) {
         getLogger(this).info("on click on PEP execute");
 
         try {

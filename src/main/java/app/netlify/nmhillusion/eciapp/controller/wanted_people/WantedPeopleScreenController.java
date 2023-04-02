@@ -11,6 +11,7 @@ import app.netlify.nmhillusion.neon_di.annotation.Inject;
 import app.netlify.nmhillusion.neon_di.annotation.Neon;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
@@ -30,9 +31,13 @@ import static app.netlify.nmhillusion.n2mix.helper.log.LogHelper.getLogger;
 @Neon
 public class WantedPeopleScreenController extends BaseScreenController {
     private final ExecutorService executorService = Executors.newCachedThreadPool();
+    @FXML
     public TextField txtOutDataPath;
+    @FXML
     public Label lblExecuteStatus;
+    @FXML
     public Label lblExecuteStatusDetail;
+    @FXML
     public Button btnExecuteOutDataWantedPeople;
     @Inject
     private WantedPeopleService wantedPeopleService;
@@ -48,7 +53,8 @@ public class WantedPeopleScreenController extends BaseScreenController {
                 .build();
     }
 
-    public void onClickButton__BrowserOutData(ActionEvent actionEvent) {
+    @FXML
+    protected void onClickButton__BrowserOutData(ActionEvent actionEvent) {
         final FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Set place to put excel file");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Excel File(*.xlsx)", "*.xlsx"));
@@ -61,7 +67,8 @@ public class WantedPeopleScreenController extends BaseScreenController {
         }
     }
 
-    public void onClickButton__ExecuteOutDataWantedPeople(ActionEvent actionEvent) {
+    @FXML
+    protected void onClickButton__ExecuteOutDataWantedPeople(ActionEvent actionEvent) {
         try {
             final String outputDataPath = txtOutDataPath.getText();
             if (StringValidator.isBlank(outputDataPath)) {
