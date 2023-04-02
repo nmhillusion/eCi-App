@@ -11,6 +11,7 @@ import app.netlify.nmhillusion.n2mix.helper.http.HttpHelper;
 import app.netlify.nmhillusion.n2mix.helper.http.RequestHttpBuilder;
 import app.netlify.nmhillusion.n2mix.helper.office.excel.ExcelWriteHelper;
 import app.netlify.nmhillusion.n2mix.helper.office.excel.model.BasicExcelDataModel;
+import app.netlify.nmhillusion.n2mix.type.ChainMap;
 import app.netlify.nmhillusion.n2mix.type.function.ThrowableVoidFunction;
 import app.netlify.nmhillusion.n2mix.util.IOStreamUtil;
 import app.netlify.nmhillusion.n2mix.util.RegexUtil;
@@ -87,20 +88,24 @@ public class PoliticsRulersServiceImpl implements PoliticsRulersService {
                 .setStatusDetail("start crawling...")
         );
 
-        final Map<String, List<PoliticianEntity>> politicianData = new HashMap<>();
         final List<IndexEntity> indexLinks = parseHomePage();
         getLogger(this).info("parser index links: " + indexLinks);
+        final int indexLinksSize = indexLinks.size();
         onUpdateProgress.throwableVoidApply(new StatusModel()
                 .setStatusName("loaded homepage")
-                .setStatusDetail("obtains homepage with total indexes: " + indexLinks.size())
+                .setStatusDetail("obtains homepage with total indexes: " + indexLinksSize)
         );
 
         if (!indexLinks.isEmpty()) {
-            for (IndexEntity indexLinkItem : indexLinks) {
+            for (int linkItemIdx = 0; linkItemIdx < indexLinksSize; ++linkItemIdx) {
+                final IndexEntity indexLinkItem = indexLinks.get(linkItemIdx);
+
                 final long startTime = System.currentTimeMillis();
                 onUpdateProgress.throwableVoidApply(new StatusModel()
                         .setStatusName("loading - " + indexLinkItem.getTitle())
-                        .setStatusDetail(">> start loading: " + indexLinkItem.getTitle() + " : " + indexLinkItem.getHref())
+                        .setStatusDetail(">> start loading: " + indexLinkItem.getTitle() + " : " + indexLinkItem.getHref()
+                                + " (%d/%d)".formatted(linkItemIdx + 1, indexLinksSize)
+                        )
                 );
 
                 final List<PoliticianEntity> politicianEntities = fetchCharacterPage(indexLinkItem);
@@ -108,10 +113,15 @@ public class PoliticsRulersServiceImpl implements PoliticsRulersService {
                 getLogger(this).info("politician list -> " + politicianListSize);
                 onUpdateProgress.throwableVoidApply(new StatusModel()
                         .setStatusName("finished - " + indexLinkItem.getTitle())
-                        .setStatusDetail("<< end loading: " + indexLinkItem.getTitle() + " : " + indexLinkItem.getHref() + " -> size: " + politicianListSize + "; waiting for next step...")
+                        .setStatusDetail("<< end loading: " + indexLinkItem.getTitle() + " : " + indexLinkItem.getHref() + " -> size: " + politicianListSize + "; waiting for next step..."
+                                + " (%d/%d)".formatted(linkItemIdx + 1, indexLinksSize)
+                        )
                 );
 
-                politicianData.put(indexLinkItem.getTitle(), politicianEntities);
+                __saveToExcelFile(outputDataPath,
+                        new ChainMap<String, List<PoliticianEntity>>()
+                                .chainPut(indexLinkItem.getTitle(), politicianEntities)
+                );
 
                 if (isTestingOnePage) {
                     break; /// Mark: TESTING
@@ -121,9 +131,14 @@ public class PoliticsRulersServiceImpl implements PoliticsRulersService {
             }
         }
 
-        getLogger(this).info("All politician list SIZE: " + politicianData.size());
-        final Map<String, byte[]> excelData = exportToExcel(politicianData);
+        onUpdateProgress.throwableVoidApply(new StatusModel()
+                .setStatusName("finished")
+                .setStatusDetail("finished crawling.")
+        );
+    }
 
+    private void __saveToExcelFile(String outputDataPath, Map<String, List<PoliticianEntity>> politicianData) throws IOException {
+        final Map<String, byte[]> excelData = exportToExcel(politicianData);
 
         for (String chainName : excelData.keySet()) {
             try (OutputStream os = new FileOutputStream(Paths.get(outputDataPath, chainName + ".pep.xlsx").toFile())) {
@@ -131,11 +146,6 @@ public class PoliticsRulersServiceImpl implements PoliticsRulersService {
                 os.flush();
             }
         }
-
-        onUpdateProgress.throwableVoidApply(new StatusModel()
-                .setStatusName("finished")
-                .setStatusDetail("finished crawling.")
-        );
     }
 
 
