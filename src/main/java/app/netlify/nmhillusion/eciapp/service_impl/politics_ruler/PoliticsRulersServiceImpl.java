@@ -102,7 +102,9 @@ public class PoliticsRulersServiceImpl implements PoliticsRulersService {
 
                 final long startTime = System.currentTimeMillis();
                 onUpdateProgress.throwableVoidApply(new StatusModel()
-                        .setStatusName("loading - " + indexLinkItem.getTitle())
+                        .setStatusName("loading - " + indexLinkItem.getTitle()
+                                + " (%d/%d)".formatted(linkItemIdx + 1, indexLinksSize)
+                        )
                         .setStatusDetail(">> start loading: " + indexLinkItem.getTitle() + " : " + indexLinkItem.getHref()
                                 + " (%d/%d)".formatted(linkItemIdx + 1, indexLinksSize)
                         )
@@ -112,7 +114,9 @@ public class PoliticsRulersServiceImpl implements PoliticsRulersService {
                 final int politicianListSize = politicianEntities.size();
                 getLogger(this).info("politician list -> " + politicianListSize);
                 onUpdateProgress.throwableVoidApply(new StatusModel()
-                        .setStatusName("finished - " + indexLinkItem.getTitle())
+                        .setStatusName("finished - " + indexLinkItem.getTitle()
+                                + " (%d/%d)".formatted(linkItemIdx + 1, indexLinksSize)
+                        )
                         .setStatusDetail("<< end loading: " + indexLinkItem.getTitle() + " : " + indexLinkItem.getHref() + " -> size: " + politicianListSize + "; waiting for next step..."
                                 + " (%d/%d)".formatted(linkItemIdx + 1, indexLinksSize)
                         )
