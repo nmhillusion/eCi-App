@@ -3,7 +3,7 @@
   <dontWrapJar>false</dontWrapJar>
   <headerType>gui</headerType>
   <jar>D:\projects\java\eCiApp\target\eCiApp-jar-with-dependencies.jar</jar>
-  <outfile>C:\Users\nmhil\Desktop\eCiApp_Final.exe</outfile>
+  <outfile>C:\Users\nmhil\Desktop\eCiApp.exe</outfile>
   <errTitle></errTitle>
   <cmdLine></cmdLine>
   <chdir>.</chdir>
@@ -13,7 +13,7 @@
   <stayAlive>false</stayAlive>
   <restartOnCrash>false</restartOnCrash>
   <manifest></manifest>
-  <icon>D:\projects\java\eCiApp\src\main\resources\app\netlify\nmhillusion\eciapp\icons\app-icon.ico</icon>
+  <icon>D:\projects\java\eCiApp\src\main\resources\app-icons\app-icon.ico</icon>
   <jre>
     <path>%JAVA_HOME%;%PATH%</path>
     <requiresJdk>true</requiresJdk>
@@ -21,4 +21,18 @@
     <minVersion>17.0.0</minVersion>
     <maxVersion></maxVersion>
   </jre>
+  <versionInfo>
+    <fileVersion>1.0.0.0</fileVersion>
+    <txtFileVersion>1.0.0.0</txtFileVersion>
+    <fileDescription>Compliance Inspection App</fileDescription>
+    <copyright>MIT</copyright>
+    <productVersion>1.0.0.0</productVersion>
+    <txtProductVersion>1.0.0.0</txtProductVersion>
+    <productName>Compliance Inspection App</productName>
+    <companyName>nmhillusion</companyName>
+    <internalName>eCiApp</internalName>
+    <originalFilename>eCiApp.exe</originalFilename>
+    <trademarks>nmhillusion</trademarks>
+    <language>ENGLISH_US</language>
+  </versionInfo>
 </launch4jConfig>
