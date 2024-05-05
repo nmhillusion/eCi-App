@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 <VBox xmlns:fx="http://javafx.com/fxml/1" spacing="3.0" xmlns="http://javafx.com/javafx/19"
-      fx:controller="app.netlify.nmhillusion.eciapp.controller.main.MainController">
+      fx:controller="tech.nmhillusion.eciapp.controller.main.MainController">
     <HBox>
         <padding>
             <Insets left="6.0" right="6.0"/>

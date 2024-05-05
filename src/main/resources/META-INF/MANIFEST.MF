@@ -1,2 +1,2 @@
 Manifest-Version: 1.0
-Main-Class: app.netlify.nmhillusion.eciapp.StartApp
+Main-Class: tech.nmhillusion.eciapp.StartApp
