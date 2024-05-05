@@ -14,7 +14,7 @@ import tech.nmhillusion.n2mix.helper.office.excel.writer.ExcelWriteHelper;
 import tech.nmhillusion.n2mix.helper.office.excel.writer.model.ExcelDataConverterModel;
 import tech.nmhillusion.n2mix.type.ChainMap;
 import tech.nmhillusion.n2mix.type.function.ThrowableVoidFunction;
-import app.netlify.nmhillusion.neon_di.annotation.Neon;
+import tech.nmhillusion.neon_di.annotation.Neon;
 
 import java.io.FileOutputStream;
 import java.io.IOException;

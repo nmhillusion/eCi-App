@@ -4,7 +4,7 @@ import app.netlify.nmhillusion.eciapp.model.StatusModel;
 import app.netlify.nmhillusion.eciapp.model.politics_ruler.IndexEntity;
 import app.netlify.nmhillusion.eciapp.model.politics_ruler.PoliticianEntity;
 import app.netlify.nmhillusion.eciapp.service.PoliticsRulersService;
-import app.netlify.nmhillusion.neon_di.annotation.Neon;
+import tech.nmhillusion.neon_di.annotation.Neon;
 import tech.nmhillusion.n2mix.exception.MissingDataException;
 import tech.nmhillusion.n2mix.helper.YamlReader;
 import tech.nmhillusion.n2mix.helper.firebase.FirebaseWrapper;

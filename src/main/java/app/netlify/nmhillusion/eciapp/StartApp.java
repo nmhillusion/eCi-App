@@ -1,7 +1,7 @@
 package app.netlify.nmhillusion.eciapp;
 
-import app.netlify.nmhillusion.neon_di.NeonEngine;
-import app.netlify.nmhillusion.neon_di.exception.NeonException;
+import tech.nmhillusion.neon_di.NeonEngine;
+import tech.nmhillusion.neon_di.exception.NeonException;
 
 /**
  * date: 2023-03-05

@@ -2,7 +2,7 @@ package app.netlify.nmhillusion.eciapp;
 
 import app.netlify.nmhillusion.eciapp.builder.FxmlLoadBuilder;
 import app.netlify.nmhillusion.eciapp.helper.ResourceHelper;
-import app.netlify.nmhillusion.neon_di.annotation.Neon;
+import tech.nmhillusion.neon_di.annotation.Neon;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;

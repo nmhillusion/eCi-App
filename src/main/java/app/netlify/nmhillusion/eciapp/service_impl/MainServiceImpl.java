@@ -2,8 +2,8 @@ package app.netlify.nmhillusion.eciapp.service_impl;
 
 import app.netlify.nmhillusion.eciapp.service.MainService;
 import app.netlify.nmhillusion.eciapp.service.WantedPeopleService;
-import app.netlify.nmhillusion.neon_di.annotation.Inject;
-import app.netlify.nmhillusion.neon_di.annotation.Neon;
+import tech.nmhillusion.neon_di.annotation.Inject;
+import tech.nmhillusion.neon_di.annotation.Neon;
 
 /**
  * date: 2023-02-25
