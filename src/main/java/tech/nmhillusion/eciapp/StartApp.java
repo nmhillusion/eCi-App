@@ -1,7 +1,8 @@
 package tech.nmhillusion.eciapp;
 
+import tech.nmhillusion.eciapp.config.ConfigRegistry;
+import tech.nmhillusion.n2mix.annotation.EnableN2mix;
 import tech.nmhillusion.neon_di.NeonEngine;
-import tech.nmhillusion.neon_di.exception.NeonException;
 
 /**
  * date: 2023-03-05
@@ -9,6 +10,7 @@ import tech.nmhillusion.neon_di.exception.NeonException;
  * created-by: nmhillusion
  */
 
+@EnableN2mix
 public class StartApp {
     private final static NeonEngine neonEngine = new NeonEngine();
 
@@ -18,10 +20,13 @@ public class StartApp {
 
     public static void main(String[] args) {
         try {
+            ConfigRegistry.getInstance()
+                    .applyConfigsFromRegistry();
+
             neonEngine
                     .run(Application.class);
             Application.main(args);
-        } catch (NeonException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
