@@ -22,9 +22,13 @@ module tech.nmhillusion.eciapp {
 
     opens tech.nmhillusion.eciapp.service_impl to neon.di;
     opens tech.nmhillusion.eciapp.service_impl.politics_ruler to neon.di;
+
     opens tech.nmhillusion.eciapp.model to n2mix.java;
     opens tech.nmhillusion.eciapp.model.politics_ruler to n2mix.java;
+
     opens tech.nmhillusion.eciapp.controller.wanted_people to javafx.fxml, neon.di;
     opens tech.nmhillusion.eciapp.controller.pep to javafx.fxml, neon.di;
+    opens tech.nmhillusion.eciapp.controller.un_sanction to javafx.fxml, neon.di;
+
     opens tech.nmhillusion.eciapp.controller.main to javafx.fxml, neon.di;
 }

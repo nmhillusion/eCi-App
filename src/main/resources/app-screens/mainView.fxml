@@ -16,6 +16,7 @@
                           onAction="#onClickButton__WantedPeople"
                 />
                 <MenuItem text="PEP" onAction="#onClickButton__PEP"/>
+                <MenuItem text="UN Sanction" onAction="#onClickButton__UN_Sanction"/>
             </items>
         </MenuButton>
     </HBox>

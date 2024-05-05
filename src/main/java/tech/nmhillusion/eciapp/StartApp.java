@@ -18,16 +18,12 @@ public class StartApp {
         return neonEngine;
     }
 
-    public static void main(String[] args) {
-        try {
-            ConfigRegistry.getInstance()
-                    .applyConfigsFromRegistry();
+    public static void main(String[] args) throws Throwable {
+        ConfigRegistry.getInstance()
+                .applyConfigsFromRegistry();
 
-            neonEngine
-                    .run(Application.class);
-            Application.main(args);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        neonEngine
+                .run(Application.class);
+        Application.main(args);
     }
 }

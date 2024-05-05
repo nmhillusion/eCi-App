@@ -1,11 +1,5 @@
 package tech.nmhillusion.eciapp.controller.main;
 
-import tech.nmhillusion.eciapp.builder.LogMessageBuilder;
-import tech.nmhillusion.eciapp.controller.BaseScreenController;
-import tech.nmhillusion.eciapp.controller.pep.PepScreenController;
-import tech.nmhillusion.eciapp.controller.wanted_people.WantedPeopleScreenController;
-import tech.nmhillusion.neon_di.annotation.Inject;
-import tech.nmhillusion.neon_di.annotation.Neon;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,6 +10,13 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import org.slf4j.event.Level;
+import tech.nmhillusion.eciapp.builder.LogMessageBuilder;
+import tech.nmhillusion.eciapp.controller.BaseScreenController;
+import tech.nmhillusion.eciapp.controller.pep.PepScreenController;
+import tech.nmhillusion.eciapp.controller.un_sanction.UNSanctionScreenController;
+import tech.nmhillusion.eciapp.controller.wanted_people.WantedPeopleScreenController;
+import tech.nmhillusion.neon_di.annotation.Inject;
+import tech.nmhillusion.neon_di.annotation.Neon;
 
 import static tech.nmhillusion.n2mix.helper.log.LogHelper.getLogger;
 
@@ -40,6 +41,9 @@ public class MainController {
     private WantedPeopleScreenController wantedPeopleController;
     @Inject
     private PepScreenController pepController;
+    @Inject
+    private UNSanctionScreenController unSanctionScreenController;
+
 
     private void applyForScreen(BaseScreenController screenController_) throws Exception {
         final ObservableList<Node> paneChildren = bodyPane.getChildren();
@@ -87,5 +91,17 @@ public class MainController {
         logView.getItems().add(0, logMessageBuilder.build());
 
         logView.setVisible(true);
+    }
+
+    public void onClickButton__UN_Sanction(ActionEvent actionEvent) throws Exception {
+        getLogger(this).info("click on button UN Sanction");
+        addLogToUI(new LogMessageBuilder()
+                .setLogLevel(Level.INFO)
+                .setMessage("open UN Sanction Screen")
+                .setContextClazz(getClass())
+        );
+
+        appTitle.setText("Parse UN Sanction List");
+        applyForScreen(unSanctionScreenController);
     }
 }
