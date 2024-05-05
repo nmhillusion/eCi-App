@@ -1,14 +1,15 @@
 package tech.nmhillusion.eciapp;
 
-import tech.nmhillusion.eciapp.builder.FxmlLoadBuilder;
-import tech.nmhillusion.eciapp.helper.ResourceHelper;
-import tech.nmhillusion.neon_di.annotation.Neon;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import tech.nmhillusion.eciapp.builder.FxmlLoadBuilder;
+import tech.nmhillusion.eciapp.helper.ResourceHelper;
 import tech.nmhillusion.n2mix.exception.InvalidArgument;
 import tech.nmhillusion.n2mix.helper.YamlReader;
+import tech.nmhillusion.n2mix.helper.log.LogHelper;
 import tech.nmhillusion.n2mix.type.function.ThrowableVoidNoInputFunction;
+import tech.nmhillusion.neon_di.annotation.Neon;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -72,5 +73,8 @@ public class Application extends javafx.application.Application {
         for (var listener : listenersWhenStop) {
             listener.apply();
         }
+
+        LogHelper.getLogger(this).info("Application Stopped.");
+        System.exit(0);
     }
 }

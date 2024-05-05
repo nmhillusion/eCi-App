@@ -13,18 +13,6 @@
         <padding>
             <Insets left="8.0" right="8.0"/>
         </padding>
-        <children>
-            <Label text="Output folder"
-                   GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2"
-            />
-            <TextField prefHeight="30.0" fx:id="txtOutDataPath" editable="false"
-                       GridPane.columnIndex="0" GridPane.rowIndex="1"
-            />
-            <Button id="btnBrowser" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Browser"
-                    GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="btnBrowserOutputFolder"
-                    onAction="#onClickButton__BrowserOutData"
-            />
-        </children>
 
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="80.0" prefWidth="100.0"/>
@@ -34,6 +22,18 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
         </rowConstraints>
+
+
+        <Label text="Output folder"
+               GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2"
+        />
+        <TextField prefHeight="30.0" fx:id="txtOutDataPath" editable="false"
+                   GridPane.columnIndex="0" GridPane.rowIndex="1"
+        />
+        <Button id="btnBrowser" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Browser"
+                GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="btnBrowserOutputFolder"
+                onAction="#onClickButton__BrowserOutData"
+        />
     </GridPane>
     <Line/>
     <HBox prefWidth="Infinity" alignment="CENTER">
