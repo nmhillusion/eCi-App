@@ -29,6 +29,7 @@ class UNSanctionServiceImplTest {
                             )
                             .toURI()
                             .getPath()
+                    , log -> LogHelper.getLogger(this).info(log)
             );
         }
         return cachedResult;
