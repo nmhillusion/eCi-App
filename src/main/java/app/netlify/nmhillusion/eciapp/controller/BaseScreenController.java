@@ -13,7 +13,7 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.Optional;
 
-import static app.netlify.nmhillusion.n2mix.helper.log.LogHelper.getLogger;
+import static tech.nmhillusion.n2mix.helper.log.LogHelper.getLogger;
 
 /**
  * date: 2023-03-27

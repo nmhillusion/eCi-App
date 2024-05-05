@@ -1,6 +1,6 @@
 package app.netlify.nmhillusion.eciapp.model.politics_ruler;
 
-import app.netlify.nmhillusion.n2mix.type.Stringeable;
+import tech.nmhillusion.n2mix.type.Stringeable;
 
 /**
  * date: 2022-11-17

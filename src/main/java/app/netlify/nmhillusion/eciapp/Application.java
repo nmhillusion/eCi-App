@@ -2,13 +2,13 @@ package app.netlify.nmhillusion.eciapp;
 
 import app.netlify.nmhillusion.eciapp.builder.FxmlLoadBuilder;
 import app.netlify.nmhillusion.eciapp.helper.ResourceHelper;
-import app.netlify.nmhillusion.n2mix.exception.InvalidArgument;
-import app.netlify.nmhillusion.n2mix.helper.YamlReader;
-import app.netlify.nmhillusion.n2mix.type.function.ThrowableVoidNoInputFunction;
 import app.netlify.nmhillusion.neon_di.annotation.Neon;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import tech.nmhillusion.n2mix.exception.InvalidArgument;
+import tech.nmhillusion.n2mix.helper.YamlReader;
+import tech.nmhillusion.n2mix.type.function.ThrowableVoidNoInputFunction;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,7 +16,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import static app.netlify.nmhillusion.n2mix.helper.log.LogHelper.getLogger;
+import static tech.nmhillusion.n2mix.helper.log.LogHelper.getLogger;
 
 @Neon
 public class Application extends javafx.application.Application {

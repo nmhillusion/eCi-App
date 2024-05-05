@@ -1,7 +1,7 @@
 package app.netlify.nmhillusion.eciapp.service;
 
 import app.netlify.nmhillusion.eciapp.model.StatusModel;
-import app.netlify.nmhillusion.n2mix.type.function.ThrowableVoidFunction;
+import tech.nmhillusion.n2mix.type.function.ThrowableVoidFunction;
 
 /**
  * date: 2023-03-05

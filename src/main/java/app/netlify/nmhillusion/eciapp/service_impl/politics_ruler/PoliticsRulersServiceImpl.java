@@ -4,19 +4,19 @@ import app.netlify.nmhillusion.eciapp.model.StatusModel;
 import app.netlify.nmhillusion.eciapp.model.politics_ruler.IndexEntity;
 import app.netlify.nmhillusion.eciapp.model.politics_ruler.PoliticianEntity;
 import app.netlify.nmhillusion.eciapp.service.PoliticsRulersService;
-import app.netlify.nmhillusion.n2mix.exception.MissingDataException;
-import app.netlify.nmhillusion.n2mix.helper.YamlReader;
-import app.netlify.nmhillusion.n2mix.helper.firebase.FirebaseWrapper;
-import app.netlify.nmhillusion.n2mix.helper.http.HttpHelper;
-import app.netlify.nmhillusion.n2mix.helper.http.RequestHttpBuilder;
-import app.netlify.nmhillusion.n2mix.helper.office.excel.ExcelWriteHelper;
-import app.netlify.nmhillusion.n2mix.helper.office.excel.model.BasicExcelDataModel;
-import app.netlify.nmhillusion.n2mix.type.ChainMap;
-import app.netlify.nmhillusion.n2mix.type.function.ThrowableVoidFunction;
-import app.netlify.nmhillusion.n2mix.util.IOStreamUtil;
-import app.netlify.nmhillusion.n2mix.util.RegexUtil;
-import app.netlify.nmhillusion.n2mix.util.StringUtil;
 import app.netlify.nmhillusion.neon_di.annotation.Neon;
+import tech.nmhillusion.n2mix.exception.MissingDataException;
+import tech.nmhillusion.n2mix.helper.YamlReader;
+import tech.nmhillusion.n2mix.helper.firebase.FirebaseWrapper;
+import tech.nmhillusion.n2mix.helper.http.HttpHelper;
+import tech.nmhillusion.n2mix.helper.http.RequestHttpBuilder;
+import tech.nmhillusion.n2mix.helper.office.excel.writer.ExcelWriteHelper;
+import tech.nmhillusion.n2mix.helper.office.excel.writer.model.BasicExcelDataModel;
+import tech.nmhillusion.n2mix.type.ChainMap;
+import tech.nmhillusion.n2mix.type.function.ThrowableVoidFunction;
+import tech.nmhillusion.n2mix.util.IOStreamUtil;
+import tech.nmhillusion.n2mix.util.RegexUtil;
+import tech.nmhillusion.n2mix.util.StringUtil;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -32,7 +32,7 @@ import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import static app.netlify.nmhillusion.n2mix.helper.log.LogHelper.getLogger;
+import static tech.nmhillusion.n2mix.helper.log.LogHelper.getLogger;
 
 /**
  * date: 2022-11-17

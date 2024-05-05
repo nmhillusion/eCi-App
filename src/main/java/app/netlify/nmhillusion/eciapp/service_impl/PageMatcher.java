@@ -2,9 +2,9 @@ package app.netlify.nmhillusion.eciapp.service_impl;
 
 import app.netlify.nmhillusion.eciapp.model.PageInfoModel;
 import app.netlify.nmhillusion.eciapp.model.WantedPeopleEntity;
-import app.netlify.nmhillusion.n2mix.util.HtmlUtil;
-import app.netlify.nmhillusion.n2mix.util.StringUtil;
-import app.netlify.nmhillusion.n2mix.validator.StringValidator;
+import tech.nmhillusion.n2mix.util.HtmlUtil;
+import tech.nmhillusion.n2mix.util.StringUtil;
+import tech.nmhillusion.n2mix.validator.StringValidator;
 
 import java.util.ArrayList;
 import java.util.Arrays;

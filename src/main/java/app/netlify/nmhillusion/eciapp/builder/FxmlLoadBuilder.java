@@ -1,9 +1,9 @@
 package app.netlify.nmhillusion.eciapp.builder;
 
 import app.netlify.nmhillusion.eciapp.StartApp;
-import app.netlify.nmhillusion.n2mix.exception.InvalidArgument;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.JavaFXBuilderFactory;
+import tech.nmhillusion.n2mix.exception.InvalidArgument;
 
 import java.io.IOException;
 import java.io.InputStream;

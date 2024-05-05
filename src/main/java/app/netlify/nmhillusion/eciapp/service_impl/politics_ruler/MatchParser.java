@@ -1,11 +1,11 @@
 package app.netlify.nmhillusion.eciapp.service_impl.politics_ruler;
 
 import app.netlify.nmhillusion.eciapp.model.politics_ruler.PoliticianEntity;
-import app.netlify.nmhillusion.n2mix.util.DateUtil;
-import app.netlify.nmhillusion.n2mix.util.HtmlUtil;
-import app.netlify.nmhillusion.n2mix.util.RegexUtil;
-import app.netlify.nmhillusion.n2mix.util.StringUtil;
-import app.netlify.nmhillusion.n2mix.validator.StringValidator;
+import tech.nmhillusion.n2mix.util.DateUtil;
+import tech.nmhillusion.n2mix.util.HtmlUtil;
+import tech.nmhillusion.n2mix.util.RegexUtil;
+import tech.nmhillusion.n2mix.util.StringUtil;
+import tech.nmhillusion.n2mix.validator.StringValidator;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -16,7 +16,7 @@ import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static app.netlify.nmhillusion.n2mix.helper.log.LogHelper.getLogger;
+import static tech.nmhillusion.n2mix.helper.log.LogHelper.getLogger;
 
 /**
  * date: 2022-12-29

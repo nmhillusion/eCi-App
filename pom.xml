@@ -104,30 +104,38 @@
                     <groupId>org.openjfx</groupId>
                     <artifactId>*</artifactId>
                 </exclusion>
+                <exclusion>
+                    <groupId>com.github.almasb.fxgl</groupId>
+                    <artifactId>fxgl-samples</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.github.almasb</groupId>
+                    <artifactId>fxgl-samples</artifactId>
+                </exclusion>
             </exclusions>
         </dependency>
 
-<!--        <dependency>-->
-<!--            <groupId>org.junit.jupiter</groupId>-->
-<!--            <artifactId>junit-jupiter-api</artifactId>-->
-<!--            <version>${junit.version}</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.junit.jupiter</groupId>-->
-<!--            <artifactId>junit-jupiter-engine</artifactId>-->
-<!--            <version>${junit.version}</version>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.junit.jupiter</groupId>-->
+        <!--            <artifactId>junit-jupiter-api</artifactId>-->
+        <!--            <version>${junit.version}</version>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.junit.jupiter</groupId>-->
+        <!--            <artifactId>junit-jupiter-engine</artifactId>-->
+        <!--            <version>${junit.version}</version>-->
+        <!--        </dependency>-->
 
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
-            <version>20220924</version>
+            <version>20240303</version>
         </dependency>
 
         <dependency>
             <groupId>com.github.nmhillusion</groupId>
             <artifactId>n2mix-java</artifactId>
-            <version>2023.3.16</version>
+            <version>2024.2.27</version>
         </dependency>
 
         <dependency>
@@ -151,6 +159,10 @@
     </dependencies>
 
     <repositories>
+        <repository>
+            <id>maven-main</id>
+            <url>https://repo.maven.apache.org/maven2/</url>
+        </repository>
         <repository>
             <id>jitpack.io</id>
             <url>https://jitpack.io</url>

@@ -4,16 +4,16 @@ import app.netlify.nmhillusion.eciapp.model.PageInfoModel;
 import app.netlify.nmhillusion.eciapp.model.StatusModel;
 import app.netlify.nmhillusion.eciapp.model.WantedPeopleEntity;
 import app.netlify.nmhillusion.eciapp.service.WantedPeopleService;
-import app.netlify.nmhillusion.n2mix.constant.OkHttpContentType;
-import app.netlify.nmhillusion.n2mix.exception.InvalidArgument;
-import app.netlify.nmhillusion.n2mix.exception.MissingDataException;
-import app.netlify.nmhillusion.n2mix.helper.YamlReader;
-import app.netlify.nmhillusion.n2mix.helper.http.HttpHelper;
-import app.netlify.nmhillusion.n2mix.helper.http.RequestHttpBuilder;
-import app.netlify.nmhillusion.n2mix.helper.office.excel.ExcelWriteHelper;
-import app.netlify.nmhillusion.n2mix.helper.office.excel.model.ExcelDataConverterModel;
-import app.netlify.nmhillusion.n2mix.type.ChainMap;
-import app.netlify.nmhillusion.n2mix.type.function.ThrowableVoidFunction;
+import tech.nmhillusion.n2mix.constant.OkHttpContentType;
+import tech.nmhillusion.n2mix.exception.InvalidArgument;
+import tech.nmhillusion.n2mix.exception.MissingDataException;
+import tech.nmhillusion.n2mix.helper.YamlReader;
+import tech.nmhillusion.n2mix.helper.http.HttpHelper;
+import tech.nmhillusion.n2mix.helper.http.RequestHttpBuilder;
+import tech.nmhillusion.n2mix.helper.office.excel.writer.ExcelWriteHelper;
+import tech.nmhillusion.n2mix.helper.office.excel.writer.model.ExcelDataConverterModel;
+import tech.nmhillusion.n2mix.type.ChainMap;
+import tech.nmhillusion.n2mix.type.function.ThrowableVoidFunction;
 import app.netlify.nmhillusion.neon_di.annotation.Neon;
 
 import java.io.FileOutputStream;
@@ -24,7 +24,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
-import static app.netlify.nmhillusion.n2mix.helper.log.LogHelper.getLogger;
+import static tech.nmhillusion.n2mix.helper.log.LogHelper.getLogger;
 
 /**
  * date: 2023-03-05
@@ -133,7 +133,7 @@ public class WantedPeopleServiceImpl implements WantedPeopleService {
                 .setUrl(BASE_URL)
                 .setBody(new ChainMap<String, Object>()
                         .chainPut("__EVENTTARGET", "dnn$ctr1088$MainForm$pager1")
-                        .chainPut("__EVENTARGUMENT", String.valueOf(pageNumber)), OkHttpContentType.FORM_DATA)
+                        .chainPut("__EVENTARGUMENT", String.valueOf(pageNumber)), OkHttpContentType.MULTIPART_FORM_DATA)
         );
 
         final String responseDataInString = new String(responseData);

@@ -1,6 +1,6 @@
 package app.netlify.nmhillusion.eciapp.builder;
 
-import app.netlify.nmhillusion.n2mix.type.ChainMap;
+import tech.nmhillusion.n2mix.type.ChainMap;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Paint;
 import org.slf4j.event.Level;

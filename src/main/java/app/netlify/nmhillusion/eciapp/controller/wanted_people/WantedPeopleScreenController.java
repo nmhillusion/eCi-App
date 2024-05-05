@@ -8,7 +8,7 @@ import app.netlify.nmhillusion.eciapp.builder.FxmlLoadBuilder;
 import app.netlify.nmhillusion.eciapp.helper.ResourceHelper;
 import app.netlify.nmhillusion.eciapp.model.StatusModel;
 import app.netlify.nmhillusion.eciapp.service.WantedPeopleService;
-import app.netlify.nmhillusion.n2mix.validator.StringValidator;
+import tech.nmhillusion.n2mix.validator.StringValidator;
 import app.netlify.nmhillusion.neon_di.annotation.Inject;
 import app.netlify.nmhillusion.neon_di.annotation.Neon;
 import javafx.application.Platform;
@@ -23,7 +23,7 @@ import java.io.File;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import static app.netlify.nmhillusion.n2mix.helper.log.LogHelper.getLogger;
+import static tech.nmhillusion.n2mix.helper.log.LogHelper.getLogger;
 
 /**
  * date: 2023-02-25
