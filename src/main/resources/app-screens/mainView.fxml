@@ -48,6 +48,7 @@
                 </style>
                 <Label text="Crawling Wanted People"/>
                 <Label text="Crawling PEP"/>
+                <Label text="Parse UN Sanction List"/>
             </VBox>
         </VBox>
     </StackPane>

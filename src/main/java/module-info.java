@@ -22,6 +22,8 @@ module tech.nmhillusion.eciapp {
 
     opens tech.nmhillusion.eciapp.service_impl to neon.di;
     opens tech.nmhillusion.eciapp.service_impl.politics_ruler to neon.di;
+    opens tech.nmhillusion.eciapp.service_impl.wanted_people to neon.di;
+    opens tech.nmhillusion.eciapp.service_impl.un_sanction to neon.di;
 
     opens tech.nmhillusion.eciapp.model to n2mix.java;
     opens tech.nmhillusion.eciapp.model.politics_ruler to n2mix.java;

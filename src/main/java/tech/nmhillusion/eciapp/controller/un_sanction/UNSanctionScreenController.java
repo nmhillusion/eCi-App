@@ -14,6 +14,9 @@ import tech.nmhillusion.eciapp.builder.LogMessageBuilder;
 import tech.nmhillusion.eciapp.controller.BaseScreenController;
 import tech.nmhillusion.eciapp.controller.main.MainController;
 import tech.nmhillusion.eciapp.helper.ResourceHelper;
+import tech.nmhillusion.eciapp.service.UNSanctionService;
+import tech.nmhillusion.n2mix.helper.log.LogHelper;
+import tech.nmhillusion.neon_di.annotation.Inject;
 import tech.nmhillusion.neon_di.annotation.Neon;
 
 import java.io.File;
@@ -44,6 +47,9 @@ public class UNSanctionScreenController extends BaseScreenController {
     public Label lblExecuteStatus;
     @FXML
     public Label lblExecuteStatusDetail;
+
+    @Inject
+    private UNSanctionService unSanctionService;
 
     private MainController mainController;
 
@@ -102,6 +108,21 @@ public class UNSanctionScreenController extends BaseScreenController {
                         .setMessage("Execute Out Data UNSanction ...")
                         .setContextClazz(getClass())
         );
+
+        executorService.submit(() -> {
+            try {
+                unSanctionService.readSanctionListFromFile(txtInDataPath.getText());
+            } catch (Exception ex) {
+                LogHelper.getLogger(this).error(ex);
+
+                mainController.addLogToUI(
+                        new LogMessageBuilder()
+                                .setLogLevel(Level.ERROR)
+                                .setMessage(ex.getMessage())
+                                .setContextClazz(getClass())
+                );
+            }
+        });
     }
 
 }

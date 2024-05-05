@@ -2,6 +2,7 @@ package tech.nmhillusion.eciapp;
 
 import tech.nmhillusion.eciapp.config.ConfigRegistry;
 import tech.nmhillusion.n2mix.annotation.EnableN2mix;
+import tech.nmhillusion.n2mix.helper.log.LogHelper;
 import tech.nmhillusion.neon_di.NeonEngine;
 
 /**
@@ -18,12 +19,17 @@ public class StartApp {
         return neonEngine;
     }
 
-    public static void main(String[] args) throws Throwable {
-        ConfigRegistry.getInstance()
-                .applyConfigsFromRegistry();
+    public static void main(String[] args) {
+        try {
+            ConfigRegistry.getInstance()
+                    .applyConfigsFromRegistry();
 
-        neonEngine
-                .run(Application.class);
-        Application.main(args);
+            neonEngine
+                    .run(Application.class);
+            Application.main(args);
+        } catch (Throwable ex) {
+            LogHelper.getLogger(StartApp.class).error(ex);
+            System.exit(-1);
+        }
     }
 }

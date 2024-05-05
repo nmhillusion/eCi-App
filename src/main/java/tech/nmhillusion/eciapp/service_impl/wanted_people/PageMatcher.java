@@ -1,4 +1,4 @@
-package tech.nmhillusion.eciapp.service_impl;
+package tech.nmhillusion.eciapp.service_impl.wanted_people;
 
 import tech.nmhillusion.eciapp.model.PageInfoModel;
 import tech.nmhillusion.eciapp.model.WantedPeopleEntity;
