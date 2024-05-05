@@ -11,12 +11,17 @@ import tech.nmhillusion.eciapp.service_impl.un_sanction.parser.UNSanctionEntityP
 import tech.nmhillusion.eciapp.service_impl.un_sanction.parser.UNSanctionIndividualParser;
 import tech.nmhillusion.eciapp.service_impl.un_sanction.parser.XmlNodeParser;
 import tech.nmhillusion.n2mix.helper.log.LogHelper;
+import tech.nmhillusion.n2mix.helper.office.excel.writer.ExcelWriteHelper;
+import tech.nmhillusion.n2mix.helper.office.excel.writer.model.ExcelDataConverterModel;
 import tech.nmhillusion.neon_di.annotation.Neon;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,5 +80,61 @@ public class UNSanctionServiceImpl implements UNSanctionService {
         }
 
         return resultList;
+    }
+
+    @Override
+    public Path writeSanctionListToFile(SanctionModel sanctionModel, String excelFilePath) throws Exception {
+        final byte[] exportData_ = new ExcelWriteHelper()
+                .addSheetData(
+                        new ExcelDataConverterModel<IndividualSanctionModel>()
+                                .addColumnConverters("DATAID", IndividualSanctionModel::getDataid)
+                                .addColumnConverters("DESIGNATION", IndividualSanctionModel::getDesignation)
+                                .addColumnConverters("FIRST_NAME", IndividualSanctionModel::getFirst_name)
+                                .addColumnConverters("INDIVIDUAL_ADDRESS", IndividualSanctionModel::getIndividual_address)
+                                .addColumnConverters("INDIVIDUAL_ALIAS", IndividualSanctionModel::getIndividual_alias)
+                                .addColumnConverters("INDIVIDUAL_DATE_OF_BIRTH", IndividualSanctionModel::getIndividual_date_of_birth)
+                                .addColumnConverters("INDIVIDUAL_PLACE_OF_BIRTH", IndividualSanctionModel::getIndividual_place_of_birth)
+                                .addColumnConverters("LAST_DAY_UPDATED", IndividualSanctionModel::getLast_day_updated)
+                                .addColumnConverters("COMMENTS1", IndividualSanctionModel::getComments1)
+                                .addColumnConverters("SECOND_NAME", IndividualSanctionModel::getSecond_name)
+                                .addColumnConverters("LIST_TYPE", IndividualSanctionModel::getList_type)
+                                .addColumnConverters("LISTED_ON", IndividualSanctionModel::getListed_on)
+                                .addColumnConverters("NAME_ORIGINAL_SCRIPT", IndividualSanctionModel::getName_original_script)
+                                .addColumnConverters("NATIONALITY", IndividualSanctionModel::getNationality)
+                                .addColumnConverters("REFERENCE_NUMBER", IndividualSanctionModel::getReference_number)
+                                .addColumnConverters("TITLE", IndividualSanctionModel::getTitle)
+                                .addColumnConverters("UN_LIST_TYPE", IndividualSanctionModel::getUn_list_type)
+                                .addColumnConverters("VERSIONNUM", IndividualSanctionModel::getVersionnum)
+                                .setRawData(sanctionModel.getIndividualSanctionModelList())
+                                .setSheetName("Individuals")
+
+                )
+                .addSheetData(
+                        new ExcelDataConverterModel<EntitySanctionModel>()
+                                .addColumnConverters("COMMENTS1", EntitySanctionModel::getComments1)
+                                .addColumnConverters("DATAID", EntitySanctionModel::getDataid)
+                                .addColumnConverters("ENTITY_ADDRESS", EntitySanctionModel::getEntity_address)
+                                .addColumnConverters("ENTITY_ALIAS", EntitySanctionModel::getEntity_alias)
+                                .addColumnConverters("FIRST_NAME", EntitySanctionModel::getFirst_name)
+                                .addColumnConverters("LAST_DAY_UPDATED", EntitySanctionModel::getLast_day_updated)
+                                .addColumnConverters("LIST_TYPE", EntitySanctionModel::getList_type)
+                                .addColumnConverters("LISTED_ON", EntitySanctionModel::getListed_on)
+                                .addColumnConverters("REFERENCE_NUMBER", EntitySanctionModel::getReference_number)
+                                .addColumnConverters("UN_LIST_TYPE", EntitySanctionModel::getUn_list_type)
+                                .addColumnConverters("VERSIONNUM", EntitySanctionModel::getVersionnum)
+                                .setRawData(sanctionModel.getEntitySanctionModelList())
+                                .setSheetName("Entities")
+                )
+                .build();
+
+        final Path outputPath = Path.of(excelFilePath);
+
+        try (final FileOutputStream fileOutputStream_ = new FileOutputStream(excelFilePath);
+             final BufferedOutputStream bufferedOutputStream_ = new BufferedOutputStream(fileOutputStream_)) {
+            bufferedOutputStream_.write(exportData_);
+            bufferedOutputStream_.flush();
+        }
+
+        return outputPath;
     }
 }
