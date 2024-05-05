@@ -13,6 +13,7 @@ import tech.nmhillusion.eciapp.service_impl.un_sanction.parser.XmlNodeParser;
 import tech.nmhillusion.n2mix.helper.log.LogHelper;
 import tech.nmhillusion.n2mix.helper.office.excel.writer.ExcelWriteHelper;
 import tech.nmhillusion.n2mix.helper.office.excel.writer.model.ExcelDataConverterModel;
+import tech.nmhillusion.n2mix.type.function.VoidFunction;
 import tech.nmhillusion.neon_di.annotation.Neon;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -39,7 +40,7 @@ public class UNSanctionServiceImpl implements UNSanctionService {
     private final UNSanctionEntityParser unSanctionEntityParser = new UNSanctionEntityParser();
 
     @Override
-    public SanctionModel readSanctionListFromFile(String filePath) throws Exception {
+    public SanctionModel readSanctionListFromFile(String filePath, VoidFunction<String> logDelegate) throws Exception {
         getLogger(this).info(">> readSanctionListFromFile: %s".formatted(filePath));
 
         final DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -56,8 +57,8 @@ public class UNSanctionServiceImpl implements UNSanctionService {
             final NodeList entityList = doc.getElementsByTagName("ENTITY");
             LogHelper.getLogger(this).info("found %s entities".formatted(entityList.getLength()));
 
-            final List<IndividualSanctionModel> individualSanctionList = parseNodeList(individualList, unSanctionIndividualParser);
-            final List<EntitySanctionModel> entitySanctionList = parseNodeList(individualList, unSanctionEntityParser);
+            final List<IndividualSanctionModel> individualSanctionList = parseNodeList(individualList, unSanctionIndividualParser, logDelegate);
+            final List<EntitySanctionModel> entitySanctionList = parseNodeList(individualList, unSanctionEntityParser, logDelegate);
 
             return new SanctionModel()
                     .setEntitySanctionModelList(entitySanctionList)
@@ -66,7 +67,7 @@ public class UNSanctionServiceImpl implements UNSanctionService {
         }
     }
 
-    private <T> List<T> parseNodeList(NodeList itemNodeList, XmlNodeParser<T> parser_) throws Exception {
+    private <T> List<T> parseNodeList(NodeList itemNodeList, XmlNodeParser<T> parser_, VoidFunction<String> logDelegate) throws Exception {
         final List<T> resultList = new ArrayList<>();
 
         final int nodeListLength = itemNodeList.getLength();
@@ -75,6 +76,7 @@ public class UNSanctionServiceImpl implements UNSanctionService {
 
             final T item_ = parser_.parse(node_, DELIMITER);
             LogHelper.getLogger(this).info("item %s".formatted(item_));
+            logDelegate.apply("item %s".formatted(item_));
 
             resultList.add(item_);
         }

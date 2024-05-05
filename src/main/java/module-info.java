@@ -14,6 +14,7 @@ module tech.nmhillusion.eciapp {
     requires neon.di;
     requires org.slf4j;
     requires pi.logger;
+    requires java.desktop;
 
     opens tech.nmhillusion.eciapp to javafx.fxml, neon.di;
     exports tech.nmhillusion.eciapp;

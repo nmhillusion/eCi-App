@@ -29,7 +29,6 @@
         />
         <TextField prefHeight="30.0" fx:id="txtInDataPath" editable="false"
                    GridPane.columnIndex="0" GridPane.rowIndex="1"
-                   text="F:/java/eCiApp/src/test/resources/union-nations/politicians/consolidated.xml"
         />
         <Button id="btnBrowser" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Browser"
                 GridPane.columnIndex="1" GridPane.rowIndex="1" onAction="#onClickButton__BrowserInData"

@@ -1,12 +1,13 @@
 package tech.nmhillusion.eciapp.controller;
 
-import tech.nmhillusion.eciapp.controller.main.MainController;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import tech.nmhillusion.eciapp.controller.main.MainController;
+import tech.nmhillusion.n2mix.type.function.VoidFunction;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,6 +29,10 @@ public abstract class BaseScreenController {
     }
 
     protected synchronized void showAlert(Alert.AlertType alertType, String message, ButtonType... buttonTypes) {
+        showAlert(alertType, message, null, buttonTypes);
+    }
+
+    protected synchronized void showAlert(Alert.AlertType alertType, String message, VoidFunction<ButtonType> callbackUserAction, ButtonType... buttonTypes) {
         if (null == alertIcon) {
             try (final InputStream alertIconStream = getClass().getClassLoader().getResourceAsStream("app-icons/app-icon.png")) {
                 if (null != alertIconStream) {
@@ -50,6 +55,10 @@ public abstract class BaseScreenController {
             alert.setHeaderText(message);
             final Optional<ButtonType> result_ = alert.showAndWait();
             getLogger(this).info("result of alert: " + result_);
+
+            if (null != callbackUserAction) {
+                result_.ifPresent(callbackUserAction::apply);
+            }
         });
     }
 
