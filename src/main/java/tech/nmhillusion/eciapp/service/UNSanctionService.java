@@ -1,9 +1,6 @@
 package tech.nmhillusion.eciapp.service;
 
-import org.xml.sax.SAXException;
-
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.FileNotFoundException;
+import tech.nmhillusion.eciapp.model.un_sanction.SanctionModel;
 
 /**
  * created by: nmhillusion
@@ -11,5 +8,5 @@ import java.io.FileNotFoundException;
  * created date: 2024-05-05
  */
 public interface UNSanctionService {
-    void readSanctionListFromFile(String filePath) throws Exception;
+    SanctionModel readSanctionListFromFile(String filePath) throws Exception;
 }
