@@ -42,7 +42,7 @@
         <dependency>
             <groupId>com.github.nmhillusion</groupId>
             <artifactId>n2mix-java</artifactId>
-            <version>2024.2.27</version>
+            <version>2024.5.6</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.springframework</groupId>
@@ -82,8 +82,8 @@
         </dependency>
 
         <dependency>
-            <!--            <groupId>com.github.nmhillusion</groupId>-->
-            <groupId>tech.nmhillusion</groupId>
+            <groupId>com.github.nmhillusion</groupId>
+            <!--            <groupId>tech.nmhillusion</groupId>-->
             <artifactId>neon-di</artifactId>
             <version>2024.5.5</version>
         </dependency>
