@@ -3,10 +3,10 @@ package tech.nmhillusion.eciapp.controller.un_sanction;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
-import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import org.slf4j.event.Level;
@@ -49,11 +49,6 @@ public class UNSanctionScreenController extends BaseScreenController {
     public TextField txtOutDataPath;
     @FXML
     public TextField txtInDataPath;
-
-    @FXML
-    public Label lblExecuteStatus;
-    @FXML
-    public Label lblExecuteStatusDetail;
 
     @Inject
     private UNSanctionService unSanctionService;

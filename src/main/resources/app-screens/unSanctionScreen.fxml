@@ -51,19 +51,4 @@
                 onAction="#onClickButton__ExecuteOutDataUNSanction"
         />
     </HBox>
-    <VBox prefWidth="Infinity" alignment="CENTER" spacing="10">
-        <Label text="--/--" fx:id="lblExecuteStatus">
-            <font>
-                <Font name="System Bold" size="16"/>
-            </font>
-        </Label>
-        <Label fx:id="lblExecuteStatusDetail"
-               prefWidth="Infinity" wrapText="true" lineSpacing="5"
-        >
-            <style>
-                -fx-padding: 10px;
-                -fx-background-color: #dddddd;
-            </style>
-        </Label>
-    </VBox>
 </VBox>
