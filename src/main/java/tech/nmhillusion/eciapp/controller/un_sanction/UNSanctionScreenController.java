@@ -70,6 +70,12 @@ public class UNSanctionScreenController extends BaseScreenController {
         super.onApplyPane(appliedPane, mainController);
 
         this.mainController = mainController;
+
+        if (true) {
+            /// Mark: For testing purposes
+            txtInDataPath.setText("F:\\java\\eCiApp\\src\\test\\resources\\union-nations\\politicians\\consolidated.xml");
+            txtOutDataPath.setText("D:\\Temp_data\\un_sanction.xlsx");
+        }
     }
 
     @Override
