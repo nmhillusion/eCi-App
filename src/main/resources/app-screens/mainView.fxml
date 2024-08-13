@@ -39,7 +39,7 @@
                 <Insets top="10" left="3"/>
             </padding>
             <Label text="\@nmhillusion" style="-fx-text-fill: #aaa;"/>
-            <Label text="version: 2024-05-05"/>
+            <Label text="version: 2024-08-13"/>
             <Label text="App for common tasks of CI Department"/>
             <VBox>
                 <style>
