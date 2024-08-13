@@ -42,7 +42,7 @@
         <dependency>
             <groupId>com.github.nmhillusion</groupId>
             <artifactId>n2mix-java</artifactId>
-            <version>2024.5.6</version>
+            <version>2024.6.0</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.springframework</groupId>
@@ -78,7 +78,7 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>2.0.12</version>
+            <version>2.0.16</version>
         </dependency>
 
         <dependency>
@@ -88,9 +88,14 @@
             <version>2024.5.5</version>
         </dependency>
         <dependency>
+            <groupId>com.github.nmhillusion</groupId>
+            <artifactId>pi-logger</artifactId>
+            <version>2024.2.26</version>
+        </dependency>
+        <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
-            <version>5.10.2</version>
+            <version>5.10.3</version>
             <scope>test</scope>
         </dependency>
 

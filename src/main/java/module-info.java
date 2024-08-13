@@ -5,8 +5,8 @@ module tech.nmhillusion.eciapp {
     requires n2mix.java;
     requires neon.di;
     requires org.slf4j;
-    requires pi.logger;
     requires java.desktop;
+    requires pi.logger;
 
     opens tech.nmhillusion.eciapp to javafx.fxml, neon.di;
     exports tech.nmhillusion.eciapp;
