@@ -58,7 +58,7 @@ public class UNSanctionServiceImpl implements UNSanctionService {
             LogHelper.getLogger(this).info("found %s entities".formatted(entityList.getLength()));
 
             final List<IndividualSanctionModel> individualSanctionList = parseNodeList(individualList, unSanctionIndividualParser, logDelegate);
-            final List<EntitySanctionModel> entitySanctionList = parseNodeList(individualList, unSanctionEntityParser, logDelegate);
+            final List<EntitySanctionModel> entitySanctionList = parseNodeList(entityList, unSanctionEntityParser, logDelegate);
 
             return new SanctionModel()
                     .setEntitySanctionModelList(entitySanctionList)
