@@ -70,6 +70,7 @@ pursuant to Security Council resolution 1822 (2008) was concluded on 27 Jul.
     private String versionnum;
     private String first_name;
     private String second_name;
+    private String third_name;
     private String un_list_type;
     private String reference_number;
     private String listed_on;
@@ -118,6 +119,15 @@ pursuant to Security Council resolution 1822 (2008) was concluded on 27 Jul.
 
     public IndividualSanctionModel setSecond_name(String second_name) {
         this.second_name = second_name;
+        return this;
+    }
+
+    public String getThird_name() {
+        return third_name;
+    }
+
+    public IndividualSanctionModel setThird_name(String third_name) {
+        this.third_name = third_name;
         return this;
     }
 

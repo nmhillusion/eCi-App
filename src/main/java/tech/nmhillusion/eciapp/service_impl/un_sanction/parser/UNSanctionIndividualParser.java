@@ -99,6 +99,11 @@ public class UNSanctionIndividualParser extends XmlNodeParser<IndividualSanction
                                 "SECOND_NAME", childNodes, delimiter
                         )
                 )
+                .setThird_name(
+                        parseForField(
+                                "THIRD_NAME", childNodes, delimiter
+                        )
+                )
                 .setTitle(
                         parseForField(
                                 "TITLE", childNodes, delimiter
